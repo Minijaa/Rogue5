@@ -24,8 +24,7 @@ public class Location {
 
     public Location(Point p) {
         mapChar = 'O';
-        position.x = p.x;
-        position.y = p.y;
+        position = p;
     }
 
     public String getLocationText() {
