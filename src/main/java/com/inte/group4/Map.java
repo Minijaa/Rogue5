@@ -5,8 +5,6 @@ import java.awt.*;
 public class Map {
     private Location[][] mapGrid;
     private boolean firstRun;
-
-
     private Location activeLocation;
 
     public Map() {
@@ -27,9 +25,7 @@ public class Map {
         if (firstRun) {
             for (int y = 0; y < mapGrid.length; y++) {
                 for (int x = 0; x < mapGrid.length; x++) {
-                    mapGrid[x][y] = new Location(new Point(x,y));
-                    System.out.println("X " + x);
-                    System.out.println("Y " + y);
+                   mapGrid[x][y] = new Location(new Point(x,y));
                 }
             }
             setActiveLocation(4, 9);
