@@ -2,6 +2,7 @@ package com.inte.group4;
 
 /**
  * Hello world!
+ * making a small change
  *
  */
 public class App 
