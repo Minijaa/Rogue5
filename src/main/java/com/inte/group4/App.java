@@ -9,7 +9,6 @@ public class App {
 
     private void setUp() {
         map.clearGrid();
-
     }
 
     public static void main(String[] args) {
