@@ -23,6 +23,7 @@ public class Location {
     }
 
     public Location(Point p) {
+        //changed here
         mapChar = 'O';
         position = p;
     }
