@@ -4,16 +4,13 @@ import java.awt.*;
 
 public class Location {
     private String locationText;
-    private char mapChar;
     private boolean hasTreasure;
     private boolean hasMonster;
     private Point position;
-
-    public Point getPosition() {
-        return position;
-    }
-
-
+    private char mapChar;
+    private static final char visitedLocationChar = '.';
+    private static final char unvisitedLocationChar = 'O';
+    private static final char playerAtLocationChar = 'X';
 
     public Location(String locationText, char mapChar, boolean hasTreasure, boolean hasMonster) {
         this.locationText = locationText;
@@ -24,7 +21,7 @@ public class Location {
 
     public Location(Point p) {
         //changed here
-        mapChar = 'O';
+        mapChar = unvisitedLocationChar;
         position = p;
     }
 
@@ -69,4 +66,19 @@ public class Location {
 
     }
 
+    public void setVisited() {
+        setMapChar(visitedLocationChar);
+    }
+
+    public void setUnvisited() {
+        setMapChar(unvisitedLocationChar);
+    }
+
+    public void setPlayerAtLocation() {
+        setMapChar(playerAtLocationChar);
+    }
+
+    public Point getPosition() {
+        return position;
+    }
 }

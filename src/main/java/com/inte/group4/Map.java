@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class Map {
     private Location[][] mapGrid;
-    private boolean firstRun;
     private Location activeLocation;
+    private int gridSize;
 
     public Map() {
-        firstRun = true;
         mapGrid = new Location[10][10];
+        createGrid();
     }
 
     public void printGrid() {
@@ -21,32 +21,32 @@ public class Map {
         }
     }
 
-    public void alterGrid() {
-        if (firstRun) {
-            for (int y = 0; y < mapGrid.length; y++) {
-                for (int x = 0; x < mapGrid.length; x++) {
-                   mapGrid[x][y] = new Location(new Point(x,y));
-                }
+    public void createGrid() {
+        for (int y = 0; y < mapGrid.length; y++) {
+            for (int x = 0; x < mapGrid.length; x++) {
+                mapGrid[x][y] = new Location(new Point(x, y));
+                gridSize++;
             }
-            setActiveLocation(4, 9);
-            firstRun = false;
-            printGrid();
-        } else {
-            printGrid();
         }
+        setActiveLocation(4, 9);
+        printGrid();
     }
 
     public void setActiveLocation(int x, int y) {
         //activeLocation.setMapChar('_');
         activeLocation = mapGrid[y][x];
-        activeLocation.setMapChar('X');
+        activeLocation.setPlayerAtLocation();
     }
 
     public Location getActiveLocation() {
         return activeLocation;
     }
 
-    public void setFirstRun(boolean firstRun) {
-        this.firstRun = firstRun;
+    public Location getLocationFromPoint(Point gridPoint){
+        return mapGrid[gridPoint.x][gridPoint.y];
+    }
+
+    public int gridSize() {
+        return gridSize;
     }
 }

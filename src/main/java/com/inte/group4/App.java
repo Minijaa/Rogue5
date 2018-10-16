@@ -4,12 +4,12 @@ import java.awt.*;
 import java.util.Scanner;
 
 public class App {
-    private Map map = new Map();
+    private Map map;
     private Scanner keyboard = new Scanner(System.in);
     private Player player;
 
     private void setUp() {
-        map.alterGrid();
+        map = new Map();
         player = new Player(new Point(9, 4));
         // System.out.println(keyboard.nextInt());
         runCommandLoop();
@@ -62,8 +62,9 @@ public class App {
         Location location = map.getActiveLocation();
         int newY = location.getPosition().x;
         int newX = location.getPosition().y;
+        location.setVisited();
         map.setActiveLocation(newX, newY-1);
-        map.alterGrid();
+        map.printGrid();
 
     }
 
