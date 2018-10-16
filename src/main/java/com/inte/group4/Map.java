@@ -32,7 +32,7 @@ public class Map {
             firstRun = false;
             printGrid();
         } else {
-
+            printGrid();
         }
     }
 

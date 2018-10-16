@@ -16,5 +16,6 @@ public class Player {
         currentPosition = newPosition;
 
     }
+
 }
 

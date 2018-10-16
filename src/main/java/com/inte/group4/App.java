@@ -59,7 +59,6 @@ public class App {
     }
 
     private void travelDirection(String direction) {
-        //Omvänt x och y'
         Location location = map.getActiveLocation();
         int newY = location.getPosition().x;
         int newX = location.getPosition().y;
