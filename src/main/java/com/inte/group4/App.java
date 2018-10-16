@@ -22,21 +22,27 @@ public class App {
     private void runCommandLoop() {
         boolean running = true;
         System.out.println();
-        while (running) {
+        while (running) {  
+        	
+        	Location oldLocation = map.getActiveLocation();
+            int newX = oldLocation.getPosition().x;
+            int newY = oldLocation.getPosition().y;
+            System.out.println("Coords before change: " + newX + " " + newY);
+            
             System.out.println("Where do you want to go next?");
             String cmd = normalizeString(readLine());
             switch (cmd) {
                 case "Up":
-                    travelDirection("up");
+                	newX--;
                     break;
                 case "Down":
-                    travelDirection("down");
+                	newX++;
                     break;
                 case "Left":
-                    travelDirection("left");
+                	newY--;
                     break;
                 case "Right":
-                    travelDirection("right");
+                	newY++;
                     break;
                 case "Exit":
                     running = false;
@@ -45,6 +51,8 @@ public class App {
                 default:
                     System.out.println("Fel kommando!");
             }
+            System.out.println("Coords after change: " + newX + " " + newY);
+            travelDirection(newX, newY);
         }
     }
 
@@ -66,6 +74,14 @@ public class App {
         map.setActiveLocation(newX, newY-1);
         map.printGrid();
 
+    }
+    
+    private void travelDirection(int newX, int newY) {
+    	// Control if newX and newY are within the grid system, if not no movey move.
+    	Location oldLocation = map.getActiveLocation();
+    	oldLocation.setVisited();
+    	map.setActiveLocation(newY, newX);
+    	map.printGrid();
     }
 
     public static void main(String[] args) {
