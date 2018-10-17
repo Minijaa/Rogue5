@@ -33,16 +33,16 @@ public class App {
             String cmd = normalizeString(readLine());
             switch (cmd) {
                 case "Up":
-                	newX--;
+                	newY++;
                     break;
                 case "Down":
-                	newX++;
-                    break;
-                case "Left":
                 	newY--;
                     break;
+                case "Left":
+                	newX--;
+                    break;
                 case "Right":
-                	newY++;
+                	newX++;
                     break;
                 case "Exit":
                     running = false;
@@ -66,21 +66,13 @@ public class App {
         }
     }
 
-    private void travelDirection(String direction) {
-        Location location = map.getActivePlayerLocation();
-        int newY = location.getPosition().x;
-        int newX = location.getPosition().y;
-        location.setVisited();
-        map.setActivePlayerLocation(newX, newY-1);
-        map.printGrid();
 
-    }
     
     private void travelDirection(int newX, int newY) {
     	// Control if newX and newY are within the grid system, if not no movey move.
     	Location oldLocation = map.getActivePlayerLocation();
     	oldLocation.setVisited();
-    	map.setActivePlayerLocation(newY, newX);
+    	map.setActivePlayerLocation(newX, newY);
     	map.printGrid();
     }
 

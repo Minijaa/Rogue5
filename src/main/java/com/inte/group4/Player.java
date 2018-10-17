@@ -2,7 +2,7 @@ package com.inte.group4;
 
 import java.awt.*;
 
-public class Player {
+public class Player extends Sprite{
     private Point currentPosition;
 
     public Player(Point position){
@@ -14,6 +14,15 @@ public class Player {
 
     public void setPosition(Point newPosition) {
         currentPosition = newPosition;
+
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    public void decreaseHp(){
 
     }
 

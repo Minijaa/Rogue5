@@ -14,30 +14,31 @@ public class Map {
 
     public String  printGrid() {
         StringBuilder mapBuilder = new StringBuilder("");
-        for (Location[] array : mapGrid) {
+        for (int y = mapGrid.length-1; y >= 0; y--) {
             System.out.println();
             mapBuilder.append("\n");
-            for (Location location : array) {
-                System.out.print(location.getMapChar() + " ");
-                mapBuilder.append(location.getMapChar() + " ");
+            for (int x = 0; x < mapGrid.length; x++) {
+
+                System.out.print(mapGrid[x][y].getMapChar() + " ");
+                mapBuilder.append(mapGrid[x][y].getMapChar() + " ");
             }
         }
         return mapBuilder.toString();
     }
 
-    public void createGrid() {
-        for (int y = 0; y < mapGrid.length; y++) {
+    private void createGrid() {
+        for (int y = mapGrid.length-1; y >= 0; y--) {
             for (int x = 0; x < mapGrid.length; x++) {
                 mapGrid[x][y] = new Location(new Point(x, y));
                 gridSize++;
             }
         }
-        setActivePlayerLocation(4, 9);
+        setActivePlayerLocation(4, 0);
         printGrid();
     }
 
     public void setActivePlayerLocation(int x, int y) {
-        activePlayerLocation = mapGrid[y][x];
+        activePlayerLocation = mapGrid[x][y];
         activePlayerLocation.setPlayerAtLocation();
     }
 
