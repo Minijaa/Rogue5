@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Map {
     private Location[][] mapGrid;
-    private Location activeLocation;
+    private Location activePlayerLocation;
     private int gridSize;
 
     public Map() {
@@ -12,13 +12,17 @@ public class Map {
         createGrid();
     }
 
-    public void printGrid() {
+    public String  printGrid() {
+        StringBuilder mapBuilder = new StringBuilder("");
         for (Location[] array : mapGrid) {
             System.out.println();
+            mapBuilder.append("\n");
             for (Location location : array) {
                 System.out.print(location.getMapChar() + " ");
+                mapBuilder.append(location.getMapChar() + " ");
             }
         }
+        return mapBuilder.toString();
     }
 
     public void createGrid() {
@@ -28,18 +32,17 @@ public class Map {
                 gridSize++;
             }
         }
-        setActiveLocation(4, 9);
+        setActivePlayerLocation(4, 9);
         printGrid();
     }
 
-    public void setActiveLocation(int x, int y) {
-        //activeLocation.setMapChar('_');
-        activeLocation = mapGrid[y][x];
-        activeLocation.setPlayerAtLocation();
+    public void setActivePlayerLocation(int x, int y) {
+        activePlayerLocation = mapGrid[y][x];
+        activePlayerLocation.setPlayerAtLocation();
     }
 
-    public Location getActiveLocation() {
-        return activeLocation;
+    public Location getActivePlayerLocation() {
+        return activePlayerLocation;
     }
 
     public Location getLocationFromPoint(Point gridPoint){

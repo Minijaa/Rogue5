@@ -24,7 +24,7 @@ public class App {
         System.out.println();
         while (running) {  
         	
-        	Location oldLocation = map.getActiveLocation();
+        	Location oldLocation = map.getActivePlayerLocation();
             int newX = oldLocation.getPosition().x;
             int newY = oldLocation.getPosition().y;
             System.out.println("Coords before change: " + newX + " " + newY);
@@ -67,20 +67,20 @@ public class App {
     }
 
     private void travelDirection(String direction) {
-        Location location = map.getActiveLocation();
+        Location location = map.getActivePlayerLocation();
         int newY = location.getPosition().x;
         int newX = location.getPosition().y;
         location.setVisited();
-        map.setActiveLocation(newX, newY-1);
+        map.setActivePlayerLocation(newX, newY-1);
         map.printGrid();
 
     }
     
     private void travelDirection(int newX, int newY) {
     	// Control if newX and newY are within the grid system, if not no movey move.
-    	Location oldLocation = map.getActiveLocation();
+    	Location oldLocation = map.getActivePlayerLocation();
     	oldLocation.setVisited();
-    	map.setActiveLocation(newY, newX);
+    	map.setActivePlayerLocation(newY, newX);
     	map.printGrid();
     }
 
