@@ -5,18 +5,18 @@ import java.awt.*;
 public class Location {
     private String locationText;
     private boolean hasTreasure;
-    private boolean hasMonster;
+    private Monster monster = null;
     private Point position;
     private char mapChar;
     private static final char visitedLocationChar = '.';
     private static final char unvisitedLocationChar = 'O';
     private static final char playerAtLocationChar = 'X';
 
-    public Location(String locationText, char mapChar, boolean hasTreasure, boolean hasMonster) {
+    public Location(String locationText, char mapChar, boolean hasTreasure) {
         this.locationText = locationText;
         this.mapChar = mapChar;
         this.hasTreasure = hasTreasure;
-        this.hasMonster = hasMonster;
+        //kanske ska ha monster här?
     }
 
     public Location(Point p) {
@@ -49,16 +49,16 @@ public class Location {
         this.hasTreasure = hasTreasure;
     }
 
-    public boolean hasMonster() {
-        return hasMonster;
+    public Monster getMonster() {
+        return monster;
     }
 
-    public void setHasMonster(boolean hasMonster) {
-        this.hasMonster = hasMonster;
+    public void setMonster(Monster monster) {
+        this.monster = monster;
     }
 
     public void playerEntersLocation() {
-        if (hasMonster) {
+        if (monster != null) {
             System.out.println("FIGHT!!!");
         }
 

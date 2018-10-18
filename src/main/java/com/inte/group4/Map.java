@@ -1,10 +1,13 @@
 package com.inte.group4;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Map {
     private Location[][] mapGrid;
     private Location activePlayerLocation;
+    private ArrayList<Monster> monsterList = new ArrayList<Monster>();
     private int gridSize;
 
     public Map() {
@@ -52,5 +55,45 @@ public class Map {
 
     public int gridSize() {
         return gridSize;
+    }
+
+    public void addMonsterToList(Monster monster){
+        monsterList.add(monster);
+    }
+    public Point rndCords(){
+        Random rnd= new Random();
+        int x,y;
+        Point cords;
+        x = rnd.nextInt(10);
+        y = rnd.nextInt(10);
+        cords = new Point(x,y);
+        return cords;
+    }
+
+    public void addMonsterToGrid(Monster monster){
+
+        if(monsterList.size()<15){
+
+            Point cords = new Point(rndCords());
+            Location location = getLocationFromPoint(cords);
+            if(location.getMonster() == null){
+                monster.setCurrentMonsterCords(cords);
+                location.setMonster(monster);
+                addMonsterToList(monster);
+                //System.out.println(monsterList.size());
+                System.out.println(monster.toString());
+
+
+            }
+        } else{
+            throw new IllegalArgumentException("There can only be 15 monsters in a map");
+        }
+    }
+
+    public Monster getMonsterFromList(int index){
+        return monsterList.get(index);
+    }
+    public int getMonsterListSize(){
+        return monsterList.size();
     }
 }

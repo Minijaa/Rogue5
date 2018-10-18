@@ -1,6 +1,10 @@
 package com.inte.group4;
 
 public class Ogre extends Monster {
+
+    public Ogre(int ap, int hp){
+        super(ap,hp);
+    }
     @Override
     public void moveMonster() {
 
@@ -14,5 +18,9 @@ public class Ogre extends Monster {
     @Override
     public void decreaseHp() {
 
+    }
+    public String toString() {
+        String str = "Ogre " + super.toString();
+        return str;
     }
 }

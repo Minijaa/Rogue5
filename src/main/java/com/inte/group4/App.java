@@ -10,7 +10,7 @@ public class App {
 
     private void setUp() {
         map = new Map();
-        player = new Player(new Point(9, 4));
+       // player = new Player(new Point(9, 4));
         // System.out.println(keyboard.nextInt());
         runCommandLoop();
     }
