@@ -1,5 +1,7 @@
 package com.inte.group4;
 
+import java.awt.*;
+
 public class Dragon extends Monster {
 
     public Dragon(int ap, int hp){
@@ -7,8 +9,8 @@ public class Dragon extends Monster {
     }
 
     @Override
-    public void moveMonster() {
-        
+    public Point moveMonster() {
+        return null;
     }
 
     @Override

@@ -20,7 +20,7 @@ class MapTest {
         newMap = new Map();
         dragon = new Dragon(200,1000);
         ogre = new Ogre(300,1400);
-        worm = new Worm(300,600);
+        worm = new Worm();
         newMap.addMonsterToGrid(dragon);
         newMap.addMonsterToGrid(ogre);
         newMap.addMonsterToGrid(worm);
@@ -36,7 +36,7 @@ class MapTest {
                     newMap.addMonsterToGrid(tempOgre);
                     break;
                 case 1:
-                    Worm tempWorm = new Worm(ap, hp);
+                    Worm tempWorm = new Worm();
                     newMap.addMonsterToGrid(tempWorm);
                     break;
                 case 2:

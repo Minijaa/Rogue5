@@ -1,13 +1,15 @@
 package com.inte.group4;
 
+import java.awt.*;
+
 public class Ogre extends Monster {
 
     public Ogre(int ap, int hp){
         super(ap,hp);
     }
     @Override
-    public void moveMonster() {
-
+    public Point moveMonster() {
+    return null;
     }
 
     @Override

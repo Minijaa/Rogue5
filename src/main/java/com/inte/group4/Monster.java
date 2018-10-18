@@ -4,13 +4,13 @@ import java.awt.*;
 
 abstract public class Monster extends Sprite {
 
-    private Point currentMonsterCords = new Point();
+    Point currentMonsterCords = new Point();
 
     public Monster(int ap, int hp){
         super(ap,hp);
     }
 
-    abstract public void moveMonster();
+    abstract public Point moveMonster();
 
 
     public Point getCurrentMonsterCords() {

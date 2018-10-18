@@ -1,13 +1,28 @@
 package com.inte.group4;
 
+import java.awt.*;
+import java.util.Random;
+
 public class Worm extends Monster {
+    //private Point monsterPosition;
 
-    public Worm(int ap, int hp){
-        super(ap,hp);
+    public Worm() {
+        super(10, 14);
     }
-    @Override
-    public void moveMonster() {
 
+    @Override
+    public Point moveMonster() {
+        Random rnd = new Random();
+        Point oldPosition = currentMonsterCords;
+        int x, y;
+        Point newPosition;
+        do {
+            x = rnd.nextInt(10);
+            y = rnd.nextInt(10);
+            newPosition = new Point(x, y);
+        } while (oldPosition != null && oldPosition.equals(newPosition));
+        currentMonsterCords = newPosition;
+        return newPosition;
     }
 
     @Override
@@ -18,6 +33,10 @@ public class Worm extends Monster {
     @Override
     public void decreaseHp() {
 
+    }
+
+    public Point getMonsterPosition() {
+        return currentMonsterCords;
     }
     public String toString() {
         String str = "Worm " + super.toString();

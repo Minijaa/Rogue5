@@ -5,10 +5,9 @@ abstract public class Sprite {
     private int ap;
     private int hp;
 
-
     public Sprite(int ap, int hp){
-        this.ap = ap;
         this.hp = hp;
+        this.ap = ap;
     }
 
     abstract public void attack();
