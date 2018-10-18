@@ -10,6 +10,10 @@ abstract public class Sprite {
         this.ap = ap;
     }
 
+    public int getHp(){
+       return hp;
+    }
+
     abstract public void attack();
     //random*Ap = skada
     abstract public void decreaseHp();

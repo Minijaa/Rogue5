@@ -3,10 +3,17 @@ package com.inte.group4;
 import java.awt.*;
 
 public class Ogre extends Monster {
+    private static final String dieSound = "Graaaaaaw";
 
     public Ogre(int ap, int hp){
         super(ap,hp);
     }
+
+    public String getDieSound(){
+        return dieSound;
+    }
+
+
     @Override
     public Point moveMonster() {
     return null;
