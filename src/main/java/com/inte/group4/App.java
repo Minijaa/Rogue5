@@ -56,7 +56,7 @@ public class App {
         }
     }
 
-    private String normalizeString(String nonNormalizedString) {
+    protected String normalizeString(String nonNormalizedString) {
         nonNormalizedString = nonNormalizedString.trim().toLowerCase();
         if (nonNormalizedString.length() == 0) {
             return nonNormalizedString;
