@@ -2,6 +2,7 @@ package com.inte.group4;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.*;
 
 class OgreTest {
@@ -21,10 +22,8 @@ class OgreTest {
         Point oldOgrePoint = newOgre.getCurrentMonsterCords();
         newOgre.moveMonster();
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
-        assertNotEquals(newOgrePoint,oldOgrePoint);
-
+        assertNotEquals(oldOgrePoint,newOgrePoint);
     }
-
 
     @Test
     public void testDecreaseOgreHpAndDie() {

@@ -13,10 +13,12 @@ public class Ogre extends Monster {
         return dieSound;
     }
 
-
     @Override
     public Point moveMonster() {
-    return null;
+        Point oldOgrePoint = getCurrentMonsterCords();
+        setCurrentMonsterCords(new Point(3,3));
+        return  currentMonsterCords;
+
     }
 
     @Override
@@ -28,6 +30,7 @@ public class Ogre extends Monster {
     public void decreaseHp() {
 
     }
+
     public String toString() {
         String str = "Ogre " + super.toString();
         return str;
