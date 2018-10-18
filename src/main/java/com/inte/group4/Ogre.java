@@ -28,7 +28,12 @@ public class Ogre extends Monster {
 
     @Override
     public void decreaseHp() {
-
+        int newHp = getHp()-200;
+        setHp(newHp);
+        if(getHp()<=0){
+          //  removeMonster(this);
+           // System.out.print(getDieSound());
+        }
     }
 
     public String toString() {
