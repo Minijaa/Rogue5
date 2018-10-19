@@ -1,9 +1,9 @@
 package com.inte.group4;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Ogre extends Monster {
-    private static final String dieSound = "Graaaaaaw";
     private int mockAttackPoints;
 
 
@@ -11,17 +11,25 @@ public class Ogre extends Monster {
         super(ap,hp);
     }
 
-    public String getDieSound(){
-        return dieSound;
-    }
+
     public void mockAttack(int attack){
         mockAttackPoints = attack;
     }
 
     @Override
     public Point moveMonster() {
+        Random random = new Random();
         Point oldOgrePoint = getCurrentMonsterCords();
-        setCurrentMonsterCords(new Point(3,3));
+        int x = (int)oldOgrePoint.getX();
+        int y = (int)oldOgrePoint.getY();
+        Point up= new Point(x,y+1);
+        Point down= new Point(x,y-1);
+        Point left = new Point(x-1,y);
+        Point right = new Point(x+1,y);
+
+        Point directionArray[] = {up,down,left,right};
+        int direction = random.nextInt(4);
+        setCurrentMonsterCords(directionArray[direction]);
         return  currentMonsterCords;
 
     }
@@ -35,7 +43,9 @@ public class Ogre extends Monster {
     public void decreaseHp() {
         int newHp = getHp()-mockAttackPoints;
         setHp(newHp);
-
+        if(getHp()<=0){
+            //mockMap.removeMonsterFromList();
+        }
     }
 
     public String toString() {

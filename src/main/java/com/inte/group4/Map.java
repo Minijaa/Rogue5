@@ -60,6 +60,11 @@ public class Map {
     public void addMonsterToList(Monster monster){
         monsterList.add(monster);
     }
+
+    public void removeMonsterFromList(Monster monster){
+        monsterList.remove(monster);
+    }
+
     public Point rndCords(){
         Random rnd= new Random();
         int x,y;

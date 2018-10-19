@@ -19,8 +19,10 @@ class OgreTest {
         newOgre = new Ogre( 100, 200);
         Point oldOgrePoint = newOgre.getCurrentMonsterCords();
         newOgre.moveMonster();
+        Point expectedPoint = new Point(oldOgrePoint.x+1,oldOgrePoint.y);
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
-        assertNotEquals(oldOgrePoint,newOgrePoint);
+        assertNotEquals(expectedPoint,newOgrePoint);
+
     }
 
     @Test
@@ -31,6 +33,8 @@ class OgreTest {
         int actual = newOgre.getHp();
         assertEquals(100,actual);
         }
+
+
 
 
 }
