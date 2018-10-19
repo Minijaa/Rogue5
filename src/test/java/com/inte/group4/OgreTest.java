@@ -8,12 +8,10 @@ import java.awt.*;
 class OgreTest {
     Ogre newOgre;
 
-
     @Test
     public void testCreateOgre(){
         newOgre = new Ogre( 100, 200);
         assertNotNull(newOgre);
-
     }
 
     @Test
@@ -26,18 +24,13 @@ class OgreTest {
     }
 
     @Test
-    public void testDecreaseOgreHpAndDie() {
+    public void testDecreaseOgreHp() {
         newOgre = new Ogre( 100, 200);
+        newOgre.mockAttack( 100);
         newOgre.decreaseHp();
         int actual = newOgre.getHp();
-        String actualString = newOgre.getDieSound();
-        assertEquals(0,actual);
-      //  assertEquals("Graaaaaaw",actualString);
+        assertEquals(100,actual);
+        }
 
-    }
-    @Test
-    public void testDecreaseOgreHpAndNotDie() {
-
-    }
 
 }

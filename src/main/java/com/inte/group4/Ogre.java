@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Ogre extends Monster {
     private static final String dieSound = "Graaaaaaw";
+    private int mockAttackPoints;
+
 
     public Ogre(int ap, int hp){
         super(ap,hp);
@@ -11,6 +13,9 @@ public class Ogre extends Monster {
 
     public String getDieSound(){
         return dieSound;
+    }
+    public void mockAttack(int attack){
+        mockAttackPoints = attack;
     }
 
     @Override
@@ -28,12 +33,9 @@ public class Ogre extends Monster {
 
     @Override
     public void decreaseHp() {
-        int newHp = getHp()-200;
+        int newHp = getHp()-mockAttackPoints;
         setHp(newHp);
-        if(getHp()<=0){
-          //  removeMonster(this);
-           // System.out.print(getDieSound());
-        }
+
     }
 
     public String toString() {

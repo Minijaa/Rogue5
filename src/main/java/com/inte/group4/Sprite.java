@@ -14,6 +14,11 @@ abstract public class Sprite {
        return hp;
     }
 
+    public void setHp(int newHp){
+        hp = newHp;
+
+    }
+
     abstract public void attack();
     //random*Ap = skada
     abstract public void decreaseHp();
