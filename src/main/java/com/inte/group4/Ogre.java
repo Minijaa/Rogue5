@@ -16,20 +16,31 @@ public class Ogre extends Monster {
         mockAttackPoints = attack;
     }
 
-    @Override
-    public Point moveMonster() {
+    private int generateRandomForMoving(){
+        //bröt ut till egen för att kunna ha kontroll vid testning
         Random random = new Random();
-        Point oldOgrePoint = getCurrentMonsterCords();
-        int x = (int)oldOgrePoint.getX();
-        int y = (int)oldOgrePoint.getY();
+        return random.nextInt(4);
+    }
+
+    private Point ogreMove(int x, int y){
         Point up= new Point(x,y+1);
         Point down= new Point(x,y-1);
         Point left = new Point(x-1,y);
         Point right = new Point(x+1,y);
 
         Point directionArray[] = {up,down,left,right};
-        int direction = random.nextInt(4);
-        setCurrentMonsterCords(directionArray[direction]);
+        return directionArray[generateRandomForMoving()];
+
+    }
+
+    @Override
+    public Point moveMonster() {
+
+        Point oldOgrePoint = getCurrentMonsterCords();
+        int x = (int)oldOgrePoint.getX();
+        int y = (int)oldOgrePoint.getY();
+        Point newOgrePoint = ogreMove(x,y);
+        setCurrentMonsterCords(newOgrePoint);
         return  currentMonsterCords;
 
     }
