@@ -3,7 +3,7 @@ package com.inte.group4;
 import java.awt.*;
 
 public class Location {
-    private String locationText;
+    private String locationText = "silence";
     private boolean hasTreasure;
     private Monster monster = null;
     private Point position;
@@ -57,12 +57,17 @@ public class Location {
         this.monster = monster;
     }
 
-    public void playerEntersLocation() {
+    public String playerEntersLocation() {
+        StringBuilder locationBuilder = new StringBuilder("");
         if (monster != null) {
             System.out.println("FIGHT!!!");
+            locationBuilder.append("FIGHT!!!");
+            return locationBuilder.toString();
         }
 
         System.out.println(locationText);
+        locationBuilder.append(locationText);
+        return locationBuilder.toString();
 
     }
 

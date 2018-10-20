@@ -20,14 +20,14 @@ class OgreTest {
         Point oldOgrePoint = newOgre.getCurrentMonsterCords();
         newOgre.moveMonster();
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
-        assertTrue(isNeighbourOf(newOgrePoint, oldOgrePoint));
+       assertEquals(1,isNeighbourOf(newOgrePoint, oldOgrePoint));
 
     }
 
-    private boolean isNeighbourOf(Point newPoint, Point oldPoint) {
+    private int isNeighbourOf(Point newPoint, Point oldPoint) {
         int d1 = Math.abs(newPoint.y - oldPoint.y);
         int d2 = Math.abs(newPoint.x - oldPoint.x);
-        return d1 + d2 == 1;
+        return d1 + d2 ;
     }
 
     @Test
