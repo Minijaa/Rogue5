@@ -13,15 +13,6 @@ public class Dragon extends Monster {
         return null;
     }
 
-    @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void decreaseHp() {
-
-    }
     public String toString() {
         String str = "Dragon " + super.toString();
         return str;

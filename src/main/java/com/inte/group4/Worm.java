@@ -25,16 +25,6 @@ public class Worm extends Monster {
         return newPosition;
     }
 
-    @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void decreaseHp() {
-
-    }
-
     public Point getMonsterPosition() {
         return currentMonsterCords;
     }

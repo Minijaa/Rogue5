@@ -45,19 +45,14 @@ public class Ogre extends Monster {
 
     }
 
-    @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void decreaseHp() {
-        int newHp = getHp()-mockAttackPoints;
-        setHp(newHp);
-        if(getHp()<=0){
-            //mockMap.removeMonsterFromList();
-        }
-    }
+//    @Override
+//    public void decreaseHp() {
+//        int newHp = getCurrentHp()-mockAttackPoints;
+//        setCurrentHp(newHp);
+//        if(getCurrentHp()<=0){
+//            //mockMap.removeMonsterFromList();
+//        }
+//    }
 
     public String toString() {
         String str = "Ogre " + super.toString();

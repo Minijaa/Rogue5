@@ -29,7 +29,7 @@ class WormTest {
     }
 
     @Test
-    void decreaseHp() {
+    void testDecreaseHp() {
 
     }
 }

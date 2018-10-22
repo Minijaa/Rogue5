@@ -34,8 +34,8 @@ class OgreTest {
     public void testDecreaseOgreHp() {
         newOgre = new Ogre( 100, 200);
         newOgre.mockAttack( 100);
-        newOgre.decreaseHp();
-        int actual = newOgre.getHp();
+        newOgre.decreaseHp(10);
+        int actual = newOgre.getCurrentHp();
         assertEquals(100,actual);
         }
 

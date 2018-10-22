@@ -53,6 +53,8 @@ public class App {
             }
             System.out.println("Coords after change: " + newX + " " + newY);
             travelDirection(newX, newY);
+            //moveMonsters();
+            map.printGrid();
         }
     }
 
@@ -65,15 +67,12 @@ public class App {
             return firstLetter + nonNormalizedString.substring(1);
         }
     }
-
-
     
     private void travelDirection(int newX, int newY) {
     	// Control if newX and newY are within the grid system, if not no movey move.
     	Location oldLocation = map.getActivePlayerLocation();
     	oldLocation.setVisited();
     	map.setActivePlayerLocation(newX, newY);
-    	map.printGrid();
     }
 
     public static void main(String[] args) {

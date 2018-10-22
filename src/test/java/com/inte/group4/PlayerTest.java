@@ -25,7 +25,7 @@ class PlayerTest {
 		Player newHpPlayer = new Player(10, 100);
 		int attack = 5;
 		newPlayer.decreaseHp(attack);
-		assertEquals(100 - attack, newPlayer.getHp());
+		assertEquals(100 - attack, newPlayer.getCurrentHp());
 	}
 
 	@Test
