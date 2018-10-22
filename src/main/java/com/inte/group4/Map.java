@@ -65,6 +65,7 @@ public class Map {
         monsterList.remove(monster);
     }
 
+
     public Point rndCords(){
         Random rnd= new Random();
         int x,y;

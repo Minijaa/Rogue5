@@ -20,7 +20,7 @@ class OgreTest {
         Point oldOgrePoint = newOgre.getCurrentMonsterCords();
         newOgre.moveMonster();
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
-       assertEquals(1,isNeighbourOf(newOgrePoint, oldOgrePoint));
+        assertEquals(1,isNeighbourOf(newOgrePoint, oldOgrePoint));
 
     }
 
@@ -38,10 +38,6 @@ class OgreTest {
         int actual = newOgre.getCurrentHp();
         assertEquals(100,actual);
         }
-
-
-
-
 
 
 }
