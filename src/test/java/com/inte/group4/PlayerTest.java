@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// Måste skriva om tester pga inventory nu har item, ej strings.
+// RIP TESTER NEVER FORGET
+
 class PlayerTest {
 
 	Player newPlayer;
