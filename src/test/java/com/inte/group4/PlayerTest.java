@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-// Måste skriva om tester pga inventory nu har item, ej strings.
-// RIP TESTER NEVER FORGET
+// För randomgenerering av items, använd switch som kan skicka in olika argument. Se MapTest.
 
 class PlayerTest {
 
@@ -14,7 +13,7 @@ class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		newPlayer = new Player(10,100);
+		newPlayer = new Player(10, 100);
 	}
 
 	@Test
@@ -38,7 +37,7 @@ class PlayerTest {
 		newPlayer.decreaseHp(attack);
 		assertFalse(newPlayer.isAlive());
 	}
-	
+
 	@Test
 	public void fillPlayerInventory() {
 		newPlayer.addToInventory(new Potion(200));
@@ -50,7 +49,7 @@ class PlayerTest {
 		newPlayer.addToInventory(oneTooManyPotion);
 		assertEquals(5, newPlayer.getInventorySize());
 	}
-	
+
 	@Test
 	public void removeFromPlayerInventoryByObject() {
 		Potion potionToRemove = new Potion(200);
@@ -58,7 +57,7 @@ class PlayerTest {
 		newPlayer.removeFromInventory(potionToRemove);
 		assertEquals(0, newPlayer.getInventorySize());
 	}
-	
+
 	@Test
 	public void removeFromPlayerInventoryByIndex() {
 		Potion secondPotion = new Potion(200);
@@ -68,12 +67,12 @@ class PlayerTest {
 		newPlayer.removeFromInventory(2);
 		assertEquals(2, newPlayer.getInventorySize());
 	}
-	
+
 	@Test
 	public void fillAndThenRemoveFromPlayerInventory() {
 		Potion potionToRemove = new Potion(200);
 		Potion potionToAdd = new Potion(200);
-		
+
 		newPlayer.addToInventory(new Potion(200));
 		newPlayer.addToInventory(new Potion(200));
 		newPlayer.addToInventory(new Potion(200));

@@ -61,45 +61,19 @@ public class App {
 		}
 	}
 
-	// Iom att vi använder scanner blir det knepigt att göra allt i player,
-	// iofs är det bara att ha en till i player, men men.
-	// Delade även upp det i två metoder pga mer strukturerad kod.
-	//
-	// Bör tänka på HUR items används. Antar instanceof och plussar på
-	// aktuell stat.
 	private void openInventory() {
-		System.out.println("Inventory opened, pick an item!");
-		player.printInventory();
-
+		int lastItem = player.printInventory();
 		int pickedItemIndex = keyboard.nextInt();
-		if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
-			System.out.println("No, wrong index!");
-		} else {
-			fetchItem(pickedItemIndex - 1);
-		}
 
-	}
-
-	private void fetchItem(int index) {
-		Item gottenItem = player.getItemByIndex(index);
-		System.out.println("What do you wanna do with " + gottenItem.toString() + "?");
-		System.out.println("1: Use item. \n 2: Drop item. \n 3: Exit/cancel.");
-		String cmd = normalizeString(readLine());
-		switch (cmd) {
-		case "1":
-			// use item
-			// remove item from player inventory and Map-list of items
-			break;
-		case "2":
-			// drop item?
-			// remove item from player inventory and Map-list of items
-			break;
-		case "3":
-			// do nothing/exit?
-			break;
-		default:
-			// do nothing/exit
-			break;
+		while (pickedItemIndex != (lastItem + 1)) {
+			if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
+				System.out.println("No item at that index!");
+			} else {
+				Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
+				player.useItem(gottenItem);
+				lastItem = player.printInventory();
+				pickedItemIndex = keyboard.nextInt();
+			}
 		}
 
 	}

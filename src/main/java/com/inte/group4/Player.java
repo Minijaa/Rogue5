@@ -40,13 +40,20 @@ public class Player extends Sprite {
 		return inventory.get(index);
 	}
 
-	public void printInventory() {
+	public void useItem(Item itemToUse) {
+		// use item, depending on type
+		// remove from inventory
+	}
+
+	public int printInventory() {
+		System.out.println("Inventory opened, pick an item!");
 		int number = 1;
 		for (Item item : inventory) {
 			System.out.println(number + ": " + item.toString());
 			number++;
 		}
-		
+		return number;
+
 	}
 
 }
