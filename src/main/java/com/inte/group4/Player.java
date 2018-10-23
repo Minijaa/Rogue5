@@ -27,7 +27,7 @@ public class Player extends Sprite {
 		return inventory.size();
 	}
 
-	public void removeFromInventory(String itemToRemove) {
+	public void removeFromInventory(Item itemToRemove) {
 		int index = inventory.indexOf(itemToRemove);
 		removeFromInventory(index);
 	}
