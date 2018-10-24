@@ -94,12 +94,17 @@ class PlayerTest {
 		Potion ultimatePotion = new Potion(501);
 		newPlayer.decreaseHp(900);
 		newPlayer.useItem(ultimatePotion);
-		assertEquals(newPlayer.getMaxHp()-900 + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+		assertEquals(newPlayer.getMaxHp() - 900 + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
 	@Test
 	public void useScrollOfPower() {
-
+		Scroll powerScroll = new Scroll(1, 1);
+		int oldMaxHp = newPlayer.getMaxHp();
+		int oldMaxAp = newPlayer.getAp();
+		newPlayer.useItem(powerScroll);
+		assertEquals(oldMaxHp + powerScroll.getMaxHpBuff(), newPlayer.getMaxHp());
+		assertEquals(oldMaxAp + powerScroll.getMaxApBuff(), newPlayer.getAp());
 	}
 
 }

@@ -55,7 +55,12 @@ abstract public class Sprite {
         return maxHp;
     }
 
-    public void setMaxHp(int hpToAddToMaxHp) {
+    public void addToMaxHp(int hpToAddToMaxHp) {
         maxHp += hpToAddToMaxHp;
     }
+    
+	public void addToAp(int apToAddtoAp) {
+		ap += apToAddtoAp;
+		
+	}
 }

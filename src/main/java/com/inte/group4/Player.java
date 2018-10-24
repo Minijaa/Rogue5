@@ -44,6 +44,10 @@ public class Player extends Sprite {
 		if (itemToUse instanceof Potion) {
 			Potion potionToUse = (Potion) itemToUse;
 			setCurrentHp(getCurrentHp() + potionToUse.getHpIncreaseValue());
+		} else if (itemToUse instanceof Scroll) {
+			Scroll scrollToUse = (Scroll) itemToUse;
+			addToMaxHp(scrollToUse.getMaxHpBuff());
+			addToAp(scrollToUse.getMaxApBuff());
 		}
 	}
 
