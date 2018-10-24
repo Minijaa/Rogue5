@@ -1,6 +1,5 @@
 package com.inte.group4;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class App {
@@ -10,8 +9,7 @@ public class App {
 
 	private void setUp() {
 		map = new Map();
-		// player = new Player(new Point(9, 4));
-		// System.out.println(keyboard.nextInt());
+		player = new Player(10, 1000);
 		runCommandLoop();
 	}
 
@@ -62,17 +60,20 @@ public class App {
 	}
 
 	private void openInventory() {
-		int lastItem = player.printInventory();
-		int pickedItemIndex = keyboard.nextInt();
+		int exitValue = player.printInventory();
+		if (exitValue != 1) {
+			System.out.println(exitValue + ": Exit inventory");
+			int pickedItemIndex = keyboard.nextInt();
 
-		while (pickedItemIndex != (lastItem + 1)) {
-			if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
-				System.out.println("No item at that index!");
-			} else {
-				Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
-				player.useItem(gottenItem);
-				lastItem = player.printInventory();
-				pickedItemIndex = keyboard.nextInt();
+			while (pickedItemIndex != (exitValue)) {
+				if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
+					System.out.println("No item at that index!");
+				} else {
+					Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
+					player.useItem(gottenItem);
+					exitValue = player.printInventory();
+					pickedItemIndex = keyboard.nextInt();
+				}
 			}
 		}
 
