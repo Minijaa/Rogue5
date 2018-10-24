@@ -7,7 +7,7 @@ public class Potion extends Item {
 	private int currentHpIncrease;
 
 	public Potion(int currentHpIncrease) {
-		if (currentHpIncrease > 0 && currentHpIncrease <= 200) {
+		if (currentHpIncrease >= 0 && currentHpIncrease <= 200) {
 			this.currentHpIncrease = MINOR_POTION_VALUE;
 		} else if (currentHpIncrease > 200 && currentHpIncrease <= 500) {
 			this.currentHpIncrease = MAJOR_POTION_VALUE;

@@ -12,27 +12,38 @@ public class Player extends Sprite {
 		inventory = new ArrayList<Item>(MAX_INVENTORY);
 	}
 
-	public void addToInventory(Item newItem) {
-		if (inventory.size() < MAX_INVENTORY) {
-			inventory.add(newItem);
-		} else {
-			System.out.println("Cannot add item, inventory is full!");
-		}
-	}
-
 	public int getInventorySize() {
 		int inventorySize = inventory.size();
 		System.out.println("Inventory contains " + inventorySize + " items, out of " + MAX_INVENTORY);
 		return inventory.size();
 	}
 
-	public void removeFromInventory(Item itemToRemove) {
-		int index = inventory.indexOf(itemToRemove);
-		removeFromInventory(index);
+	public static int getMaxInventory() {
+		return MAX_INVENTORY;
 	}
 
-	public void removeFromInventory(int indexToRemove) {
-		inventory.remove(indexToRemove);
+	public String addToInventory(Item newItem) {
+		String returnValue = null;
+		if (inventory.size() < MAX_INVENTORY) {
+			inventory.add(newItem);
+		} else {
+			returnValue = "Cannot add item, inventory is full!";
+			System.out.println(returnValue);
+		}
+		return returnValue;
+	}
+
+	public Item removeFromInventory(Item itemToRemove) {
+		int index = inventory.indexOf(itemToRemove);
+		Item removedItem = removeFromInventory(index);
+		return removedItem;
+
+	}
+
+	public Item removeFromInventory(int indexToRemove) {
+		Item removedItem = inventory.remove(indexToRemove);
+		return removedItem;
+
 	}
 
 	public Item getItemByIndex(int index) {
