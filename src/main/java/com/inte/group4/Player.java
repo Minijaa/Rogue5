@@ -1,6 +1,5 @@
 package com.inte.group4;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Player extends Sprite {
@@ -39,10 +38,13 @@ public class Player extends Sprite {
 	public Item getItemByIndex(int index) {
 		return inventory.get(index);
 	}
+	
 
-	public void useItem(Item itemToUse) {
-		// use item, depending on type
-		// remove from inventory
+	public void useItem(Item itemToUse) {		
+		if (itemToUse instanceof Potion) {
+			Potion potionToUse = (Potion) itemToUse;
+			setCurrentHp(getCurrentHp() + potionToUse.getHpIncreaseValue());
+		}
 	}
 
 	public int printInventory() {

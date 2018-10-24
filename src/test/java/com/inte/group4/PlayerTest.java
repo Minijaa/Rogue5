@@ -13,27 +13,24 @@ class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		newPlayer = new Player(10, 100);
+		newPlayer = new Player(10, 1000);
 	}
 
 	@Test
 	public void createNewPlayerTest() {
-		Player newHpPlayer = new Player(10, 100);
 		assertNotNull(newPlayer);
 	}
 
 	@Test
 	public void decreasePlayerHpTest() {
-		Player newHpPlayer = new Player(10, 100);
-		int attack = 5;
+		int attack = 100;
 		newPlayer.decreaseHp(attack);
-		assertEquals(100 - attack, newPlayer.getCurrentHp());
+		assertEquals(900, newPlayer.getCurrentHp());
 	}
 
 	@Test
 	public void decreasePlayerHpToNegativeTest() {
-		Player newHpPlayer = new Player(10, 100);
-		int attack = 100;
+		int attack = 1000;
 		newPlayer.decreaseHp(attack);
 		assertFalse(newPlayer.isAlive());
 	}
@@ -82,6 +79,27 @@ class PlayerTest {
 		newPlayer.removeFromInventory(potionToRemove);
 		newPlayer.addToInventory(potionToAdd);
 		assertEquals(potionToAdd, newPlayer.getItemByIndex(4));
+	}
+
+	@Test
+	public void useMinorPotionTest() {
+		Potion minorPotion = new Potion(200);
+		newPlayer.decreaseHp(300);
+		newPlayer.useItem(minorPotion);
+		assertEquals((newPlayer.getMaxHp() - 300) + minorPotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+	}
+
+	@Test
+	public void useUltimatePotionTest() {
+		Potion ultimatePotion = new Potion(501);
+		newPlayer.decreaseHp(900);
+		newPlayer.useItem(ultimatePotion);
+		assertEquals(newPlayer.getMaxHp()-900 + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+	}
+
+	@Test
+	public void useScrollOfPower() {
+
 	}
 
 }

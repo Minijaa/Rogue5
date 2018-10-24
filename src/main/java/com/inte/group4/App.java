@@ -1,6 +1,5 @@
 package com.inte.group4;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class App {
