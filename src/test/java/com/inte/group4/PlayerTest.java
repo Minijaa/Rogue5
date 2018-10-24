@@ -44,7 +44,7 @@ class PlayerTest {
 		assertNotNull(newPlayer);
 	}
 
-	// Skulle detta test, och det nedan, finnas i Sprite istället? Antagligen.
+	// Borde detta test vara i Sprite istället? Antagligen.
 	@Test
 	public void decreasePlayerHpTest() {
 		int attack = 100;
@@ -52,6 +52,7 @@ class PlayerTest {
 		assertEquals(900, newPlayer.getCurrentHp());
 	}
 
+	// Borde detta test vara i Sprite istället? Antagligen.
 	@Test
 	public void decreasePlayerHpToNegativeTest() {
 		int attack = 1000;
@@ -60,10 +61,17 @@ class PlayerTest {
 	}
 
 	@Test
+	public void addNullItemToPlayerInventoryTest() {
+		String nullItemString = newPlayer.addToInventory(null);
+		assertNull(nullItemString);
+	}
+
+	@Test
 	public void addItemToPlayerInventoryTest() {
 		Item itemToBeAdded = spawnItem();
-		newPlayer.addToInventory(itemToBeAdded);
+		String acceptedAddString = newPlayer.addToInventory(itemToBeAdded);
 		assertEquals(1, newPlayer.getInventorySize());
+		assertEquals("", acceptedAddString);
 	}
 
 	@Test
@@ -99,6 +107,18 @@ class PlayerTest {
 		assertEquals(itemToRemove, removedItem);
 	}
 
+	@Test
+	public void removeNullItemFromPlayerInventoryTest() {
+		Item nullItem = newPlayer.removeFromInventory(null);
+		assertNull(nullItem);
+	}
+
+	@Test
+	public void removeIncorrectIndexFromPlayerInventoryTest() {
+		Item IncorrectIndexItem = newPlayer.removeFromInventory(5);
+		assertNull(IncorrectIndexItem);
+	}
+
 	// Onödigt test pga vi testar redan att lägga till och ta bort?
 	@Test
 	public void fillAndThenRemoveFromPlayerInventoryTest() {
@@ -113,6 +133,29 @@ class PlayerTest {
 		newPlayer.removeFromInventory(potionToRemove);
 		newPlayer.addToInventory(potionToAdd);
 		assertEquals(potionToAdd, newPlayer.getItemByIndex(4));
+	}
+
+	@Test
+	public void getItemFromInventoryTest() {
+		Item itemToGet = spawnItem();
+		newPlayer.addToInventory(spawnItem());
+		newPlayer.addToInventory(itemToGet);
+		newPlayer.addToInventory(spawnItem());
+		Item gottenItem = newPlayer.getItemByIndex(1);
+		assertEquals(itemToGet, gottenItem);
+	}
+
+	@Test
+	public void getIncorrectIndexItemFromInventoryTest() {
+		Item incorrectIndexItem = newPlayer.getItemByIndex(5);
+		assertNull(incorrectIndexItem);
+	}
+
+	@Test
+	public void useNullItemTest() {
+		int resultOfUseItem = newPlayer.useItem(null);
+		assertEquals(0, resultOfUseItem);
+
 	}
 
 	@Test

@@ -12,6 +12,7 @@ public class Player extends Sprite {
 		inventory = new ArrayList<Item>(MAX_INVENTORY);
 	}
 
+	// Hur testa denna metod? Endast size, vi kan inte testa vad som skrivs ut?
 	public int getInventorySize() {
 		int inventorySize = inventory.size();
 		System.out.println("Inventory contains " + inventorySize + " items, out of " + MAX_INVENTORY);
@@ -24,46 +25,65 @@ public class Player extends Sprite {
 
 	public String addToInventory(Item newItem) {
 		String returnValue = null;
-		if (inventory.size() < MAX_INVENTORY) {
-			inventory.add(newItem);
-		} else {
-			returnValue = "Cannot add item, inventory is full!";
-			System.out.println(returnValue);
+		if (newItem != null) {
+			if (inventory.size() < MAX_INVENTORY) {
+				inventory.add(newItem);
+				returnValue = "";
+			} else {
+				returnValue = "Cannot add item, inventory is full!";
+				System.out.println(returnValue);
+			}
 		}
 		return returnValue;
 	}
 
 	public Item removeFromInventory(Item itemToRemove) {
-		int index = inventory.indexOf(itemToRemove);
-		Item removedItem = removeFromInventory(index);
-		return removedItem;
+		if (itemToRemove != null) {
+			int index = inventory.indexOf(itemToRemove);
+			Item removedItem = removeFromInventory(index);
+			return removedItem;
+		}
+		return null;
 
 	}
 
 	public Item removeFromInventory(int indexToRemove) {
-		Item removedItem = inventory.remove(indexToRemove);
-		return removedItem;
+		if (indexToRemove >= 0 && indexToRemove <= getInventorySize()) {
+			Item removedItem = inventory.remove(indexToRemove);
+			return removedItem;
+		}
+		return null;
 
 	}
 
 	public Item getItemByIndex(int index) {
-		return inventory.get(index);
+		if (index >= 0 && index <= getInventorySize()) {
+			return inventory.get(index);
+		} else {
+			return null;
+		}
 	}
 
-	public void useItem(Item itemToUse) {
+	public int useItem(Item itemToUse) {
 		if (itemToUse instanceof Potion) {
 			Potion potionToUse = (Potion) itemToUse;
 			setCurrentHp(getCurrentHp() + potionToUse.getHpIncreaseValue());
+			return 1;
 		} else if (itemToUse instanceof Bandage) {
 			Bandage bandageToUse = (Bandage) itemToUse;
 			setCurrentHp(getCurrentHp() + bandageToUse.getHpIncreaseValue());
+			return 1;
 		} else if (itemToUse instanceof Scroll) {
 			Scroll scrollToUse = (Scroll) itemToUse;
 			addToMaxHp(scrollToUse.getMaxHpBuff());
 			addToAp(scrollToUse.getMaxApBuff());
+			return 1;
+		} else {
+			return 0;
 		}
 	}
 
+	// Hur testa denna metod?
 	public int printInventory() {
 		if (inventory.isEmpty()) {
 			System.out.println("Your inventory is empty! :(");
