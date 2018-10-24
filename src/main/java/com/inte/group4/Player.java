@@ -38,12 +38,14 @@ public class Player extends Sprite {
 	public Item getItemByIndex(int index) {
 		return inventory.get(index);
 	}
-	
 
-	public void useItem(Item itemToUse) {		
+	public void useItem(Item itemToUse) {
 		if (itemToUse instanceof Potion) {
 			Potion potionToUse = (Potion) itemToUse;
 			setCurrentHp(getCurrentHp() + potionToUse.getHpIncreaseValue());
+		} else if (itemToUse instanceof Bandage) {
+			Bandage bandageToUse = (Bandage) itemToUse;
+			setCurrentHp(getCurrentHp() + bandageToUse.getHpIncreaseValue());
 		} else if (itemToUse instanceof Scroll) {
 			Scroll scrollToUse = (Scroll) itemToUse;
 			addToMaxHp(scrollToUse.getMaxHpBuff());
@@ -52,13 +54,18 @@ public class Player extends Sprite {
 	}
 
 	public int printInventory() {
-		System.out.println("Inventory opened, pick an item!");
-		int number = 1;
-		for (Item item : inventory) {
-			System.out.println(number + ": " + item.toString());
-			number++;
+		if (inventory.isEmpty()) {
+			System.out.println("Your inventory is empty! :(");
+			return 0;
+		} else {
+			System.out.println("Inventory opened, pick an item!");
+			int number = 1;
+			for (Item item : inventory) {
+				System.out.println(number + ": " + item.toString());
+				number++;
+			}
+			return number;
 		}
-		return number;
 
 	}
 

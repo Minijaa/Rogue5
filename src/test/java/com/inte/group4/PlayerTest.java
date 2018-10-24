@@ -85,16 +85,18 @@ class PlayerTest {
 	public void useMinorPotionTest() {
 		Potion minorPotion = new Potion(200);
 		newPlayer.decreaseHp(300);
+		int hurtPlayerHp = newPlayer.getCurrentHp();
 		newPlayer.useItem(minorPotion);
-		assertEquals((newPlayer.getMaxHp() - 300) + minorPotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+		assertEquals(hurtPlayerHp + minorPotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
 	@Test
 	public void useUltimatePotionTest() {
 		Potion ultimatePotion = new Potion(501);
 		newPlayer.decreaseHp(900);
+		int hurtPlayerHp = newPlayer.getCurrentHp();
 		newPlayer.useItem(ultimatePotion);
-		assertEquals(newPlayer.getMaxHp() - 900 + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+		assertEquals(hurtPlayerHp + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
 	@Test
@@ -105,6 +107,14 @@ class PlayerTest {
 		newPlayer.useItem(powerScroll);
 		assertEquals(oldMaxHp + powerScroll.getMaxHpBuff(), newPlayer.getMaxHp());
 		assertEquals(oldMaxAp + powerScroll.getMaxApBuff(), newPlayer.getAp());
+	}
+
+	public void useBandage() {
+		Bandage newBandage = new Bandage();
+		newPlayer.decreaseHp(500);
+		int hurtPlayerHp = newPlayer.getCurrentHp();
+		newPlayer.useItem(newBandage);
+		assertEquals(hurtPlayerHp + newBandage.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
 }
