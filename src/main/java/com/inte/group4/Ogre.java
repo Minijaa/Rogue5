@@ -7,56 +7,48 @@ public class Ogre extends Monster {
     private int mockAttackPoints;
     private static final int OGREHP= 100;
     private static final int OGREAP= 100;
+    private boolean direction;
+
 
 
     public Ogre(Point p){
         super(OGREAP,OGREHP, p);
         monsterChar = 'G';
-
     }
-
 
     public void mockAttack(int attack){
         mockAttackPoints = attack;
     }
 
-    private int generateRandomForMoving(){
-        //bröt ut till egen för att kunna ha kontroll vid testning
-        Random random = new Random();
-        return random.nextInt(4);
-    }
 
-    private Point ogreMove(int x, int y){
-        Point up= new Point(x,y+1);
-        Point down= new Point(x,y-1);
-        Point left = new Point(x-1,y);
-        Point right = new Point(x+1,y);
-
-        Point directionArray[] = {up,down,left,right};
-        return directionArray[generateRandomForMoving()];
-
+    private Point setDirection(int x, int y){
+        Point newDirection;
+        if (!(direction)){
+            newDirection = new Point(x-1,y);
+        }else{
+            newDirection = new Point(x+1,y);
+        }
+        return newDirection;
     }
 
     @Override
     public Point moveMonster() {
-
-        Point oldOgrePoint = getCurrentMonsterCords();
-        int x = (int)oldOgrePoint.getX();
-        int y = (int)oldOgrePoint.getY();
-        Point newOgrePoint = ogreMove(x,y);
-        setCurrentMonsterCords(newOgrePoint);
-        return  currentMonsterCords;
-
-    }
-
-//    @Override
-//    public void decreaseHp() {
-//        int newHp = getCurrentHp()-mockAttackPoints;
-//        setCurrentHp(newHp);
-//        if(getCurrentHp()<=0){
-//            //mockMap.removeMonsterFromList();
-//        }
-//    }
+      Point ogrePoint = getCurrentMonsterCords();
+       int x = (int)ogrePoint.getX();
+       int y = (int)ogrePoint.getY();
+       checkforWall();
+       Point newOgrePoint= setDirection(x,y);
+       setCurrentMonsterCords(newOgrePoint);
+        return  newOgrePoint;
+   }
+   private void checkforWall() {
+       int x = (int)getCurrentMonsterCords().getX();
+        if(x==0){
+            direction=true;
+        }else if(x==9){
+            direction=false;
+        }
+   }
 
     public String toString() {
         String str = "Ogre " + super.toString();

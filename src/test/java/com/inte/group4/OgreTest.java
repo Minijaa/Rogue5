@@ -15,15 +15,25 @@ class OgreTest {
     }
 
     @Test
-    public void moveOgreMonsterTest(){
+    public void moveOgreMonsterTestLeft(){
         newOgre = new Ogre(new Point(4,4));
-        newOgre.moveMonster();
+        for(int i=0;i<6;i++){
+            newOgre.moveMonster();
+        }
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
-        Point expected = new Point(3,4);
+        Point expected = new Point(2,4);
         assertEquals(expected,newOgrePoint);
-
     }
-
+    @Test
+    public void moveOgreMonsterTestRight(){
+        newOgre  = new Ogre(new Point(0,4));
+        for(int i=0;i<12;i++){
+            newOgre .moveMonster();
+        }
+        Point newOgrePoint = newOgre .getCurrentMonsterCords();
+        Point expected = new Point(6,4);
+        assertEquals(expected,newOgrePoint);
+    }
 
     @Test
     public void testDecreaseOgreHp() {
@@ -31,8 +41,7 @@ class OgreTest {
         newOgre.mockAttack( 100);
         newOgre.decreaseHp(10);
         int actual = newOgre.getCurrentHp();
-        assertEquals(190,actual);
+        assertEquals(90,actual);
         }
-
 
 }
