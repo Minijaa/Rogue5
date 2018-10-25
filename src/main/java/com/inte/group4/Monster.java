@@ -13,7 +13,7 @@ abstract public class Monster extends Sprite {
 
     public Monster(int ap, int hp, Point p) {
         super(ap, hp);
-        //currentMonsterCords = p;
+        currentMonsterCords = p;
     }
 
     abstract public Point moveMonster();
@@ -37,7 +37,7 @@ abstract public class Monster extends Sprite {
 
     }
 
-    public boolean isUpOrLeft() {
+    public boolean getIsUpOrLeft() {
         return isUpOrLeft;
     }
 

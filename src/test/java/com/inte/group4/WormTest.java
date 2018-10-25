@@ -14,11 +14,11 @@ class WormTest {
 
     @BeforeEach
     void setup() {
-        testWorm = new Worm();
+      //  testWorm = new Worm();
     }
 
-    @Test
-    void moveMonsterTest() {
+    //@Test
+   /* void moveMonsterTest() {
         Point oldPosition = testWorm.getMonsterPosition();
         testWorm.moveMonster();
         Point newPosition = testWorm.getMonsterPosition();
@@ -26,7 +26,7 @@ class WormTest {
         int y = newPosition.y;
         assertTrue(x >= 0 && x < 10 && y >= 0 && y < 10);
         assertFalse(oldPosition != null && oldPosition.equals(newPosition));
-    }
+    }*/
 
     @Test
     void testDecreaseHp() {

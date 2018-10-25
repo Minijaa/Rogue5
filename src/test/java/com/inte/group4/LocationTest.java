@@ -16,8 +16,8 @@ class LocationTest {
     public void testPlayerEntersLocationWithMonster() {
         Point p = new Point(0,0);
          testLocation = new Location(p);
-        Monster m  = (Monster) new Ogre( 100, 200);
-        testLocation.setMonster(m);
+      //  Monster m  = (Monster) new Ogre( 100, 200);
+       // testLocation.setMonster(m);
 
         String actual = testLocation.playerEntersLocation();
         assertEquals("FIGHT!!!",actual);

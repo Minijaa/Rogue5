@@ -13,7 +13,24 @@ public class Dragon extends Monster {
 
     @Override
     public Point moveMonster() {
-        return null;
+       Point currentPoint = this.getCurrentMonsterCords();
+       Point newPoint;
+       if(currentPoint.x==0){
+           this.setUpOrLeft(false);
+       }else if(currentPoint.y==0){
+           this.setUpOrLeft(true);
+       }
+       if(this.getIsUpOrLeft()){
+           int newX = currentPoint.x - 1;
+           int newY = currentPoint.y + 1;
+           newPoint= new Point(newX,newY);
+       }else{
+           int newX = currentPoint.x + 1;
+           int newY = currentPoint.y - 1;
+           newPoint= new Point(newX,newY);
+       }
+       System.out.print(newPoint);
+       return newPoint;
     }
 
     public String toString() {
