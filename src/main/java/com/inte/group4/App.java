@@ -21,45 +21,97 @@ public class App {
 		boolean running = true;
 		System.out.println();
 		while (running) {
-
 			Location oldLocation = map.getActivePlayerLocation();
 			int newX = oldLocation.getPosition().x;
 			int newY = oldLocation.getPosition().y;
-			System.out.println("Coords before change: " + newX + " " + newY);
 
 			System.out.println("Where do you want to go next?");
 			String cmd = normalizeString(readLine());
 			switch (cmd) {
-			case "Up":
+			case "W":
 				newY++;
 				break;
-			case "Down":
+			case "S":
 				newY--;
 				break;
-			case "Left":
+			case "A":
 				newX--;
 				break;
-			case "Right":
+			case "D":
 				newX++;
 				break;
-			case "Bag":
-				openInventory();
+			case "E":
+				openInventoryCommand();
 				break;
-			case "Exit":
-				running = false;
-				System.out.println("Programmet är avslutat");
+			case "Q":
+				running = askIfQuit();
 				break;
 			default:
-				System.out.println("Fel kommando!");
+				System.out.println("Wrong input, try again!");
 			}
-			System.out.println("Coords after change: " + newX + " " + newY);
-			travelDirection(newX, newY);
-			// moveMonsters();
-			map.printGrid();
+			if (running) {
+				travelDirection(newX, newY);
+				running = evaluatePlayerLocation();
+				if (running) {
+					map.printGrid();
+				}
+			}
+		}
+		System.out.println("Exiting game, well played or something ¯\\_(ツ)_/¯");
+	}
+
+	private boolean evaluatePlayerLocation() {
+		if (checkMonsterAtLocation()) {
+			fight();
+		}
+		if (player.isAlive()) {
+			getTreasure();
+			if (lastMonsterOnMap()) {
+				System.out.println("All monsters be dead, congratz you won?");
+				return false;
+			}
+			return true;
+		} else {
+			System.out.println("Oh dear, you are dead!");
+			return false;
 		}
 	}
 
-	private void openInventory() {
+	private boolean checkMonsterAtLocation() {
+		if (map.getActivePlayerLocation().getMonster() != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void fight() {
+		// fight-switch etc
+	}
+
+	private void getTreasure() {
+		Location activeLocation = map.getActivePlayerLocation();
+		Item treasure = activeLocation.getTreasure();
+
+		if (treasure != null) {
+			if (player.getInventorySize() == Player.getMaxInventory()) {
+				System.out.println("Inventory FULL, use an item to pick up treasure!");
+			} else {
+				player.addToInventory(treasure);
+				activeLocation.removeTreasure();
+			}
+		}
+	}
+
+	private boolean lastMonsterOnMap() {
+		if (map.getMonsterListSize() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void openInventoryCommand() {
 		int exitValue = player.printInventory();
 		if (exitValue != 1) {
 			System.out.println(exitValue + ": Exit inventory");
@@ -77,6 +129,18 @@ public class App {
 			}
 		}
 
+	}
+
+	public boolean askIfQuit() {
+		System.out.println("Do you really wanna quit?");
+		System.out.println("1: I really wanna quit" + "\n" + "2: No I won't give up yet!");
+		int quitResult = keyboard.nextInt();
+		if (quitResult == 1) {
+			return false;
+		} else {
+			return true;
+
+		}
 	}
 
 	protected String normalizeString(String nonNormalizedString) {
