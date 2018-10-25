@@ -13,9 +13,34 @@ public class Map {
     public Map() {
         mapGrid = new Location[10][10];
         createGrid();
+        createAndPlaceMonsters();
     }
 
-    public String  printGrid() {
+    private void createAndPlaceMonsters() {
+        //Adding Ogres
+        mapGrid[4][5].setMonster(new Ogre(new Point(4,5))).setUpOrLeft(true);
+        mapGrid[2][2].setMonster(new Ogre(new Point(2,2))).setUpOrLeft(false);
+        mapGrid[9][2].setMonster(new Ogre(new Point(9,2))).setUpOrLeft(true);
+        mapGrid[1][4].setMonster(new Ogre(new Point(1,4))).setUpOrLeft(false);
+        mapGrid[7][7].setMonster(new Ogre(new Point(7,7))).setUpOrLeft(false);
+
+        //Adding Dragons
+        mapGrid[2][3].setMonster(new Dragon(new Point(2,3))).setUpOrLeft(true);
+        mapGrid[5][6].setMonster(new Dragon(new Point(5,6))).setUpOrLeft(false);
+        mapGrid[0][7].setMonster(new Dragon(new Point(0,7))).setUpOrLeft(false);
+        mapGrid[8][0].setMonster(new Dragon(new Point(8,0))).setUpOrLeft(true);
+        mapGrid[7][3].setMonster(new Dragon(new Point(7,3))).setUpOrLeft(false);
+
+        //Adding Worms
+        mapGrid[0][9].setMonster(new Worm(new Point(0,9))).setUpOrLeft(false);
+        mapGrid[2][0].setMonster(new Worm(new Point(2,0))).setUpOrLeft(true);
+        mapGrid[4][9].setMonster(new Worm(new Point(4,9))).setUpOrLeft(false);
+        mapGrid[6][0].setMonster(new Worm(new Point(6,0))).setUpOrLeft(true);
+        mapGrid[8][9].setMonster(new Worm(new Point(8,9))).setUpOrLeft(false);
+
+    }
+
+    public String printGrid() {
         StringBuilder mapBuilder = new StringBuilder("");
         for (int y = mapGrid.length-1; y >= 0; y--) {
             System.out.println();

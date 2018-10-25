@@ -11,6 +11,7 @@ public class Worm extends Monster {
 
     public Worm(Point p) {
         super(10, 14,p);
+        //monsterChar = 'W';
     }
 
     @Override

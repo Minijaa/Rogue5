@@ -156,7 +156,7 @@ public class App {
 	private void travelDirection(int newX, int newY) {
 		// Control if newX and newY are within the grid system, if not no movey move.
 		Location oldLocation = map.getActivePlayerLocation();
-		oldLocation.setVisited();
+		oldLocation.setVisited(true);
 		map.setActivePlayerLocation(newX, newY);
 	}
 

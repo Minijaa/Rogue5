@@ -15,39 +15,39 @@ class MapTest {
     Worm worm;
 
     @BeforeEach
-    void setUp() {
-
-        newMap = new Map();
-        dragon = new Dragon(200,1000);
-        ogre = new Ogre(300,1400);
-        worm = new Worm();
-        newMap.addMonsterToGrid(dragon);
-        newMap.addMonsterToGrid(ogre);
-        newMap.addMonsterToGrid(worm);
-
-        do {
-                Random rnd = new Random();
-                int ap = 300 + rnd.nextInt(400);
-                int hp = 500 + rnd.nextInt(1000);
-            int monsterType = rnd.nextInt(3);
-            switch (monsterType) {
-                case 0:
-                    Ogre tempOgre = new Ogre(ap, hp);
-                    newMap.addMonsterToGrid(tempOgre);
-                    break;
-                case 1:
-                    Worm tempWorm = new Worm();
-                    newMap.addMonsterToGrid(tempWorm);
-                    break;
-                case 2:
-                    Dragon tempDragon = new Dragon(ap, hp);
-                    newMap.addMonsterToGrid(tempDragon);
-                    break;
-
-                default:
-            }
-        }while(newMap.getMonsterListSize()<15);
-    }
+//    void setUp() {
+//
+//        newMap = new Map();
+//        dragon = new Dragon(200,1000);
+//        ogre = new Ogre(300,1400);
+//        worm = new Worm();
+//        newMap.addMonsterToGrid(dragon);
+//        newMap.addMonsterToGrid(ogre);
+//        newMap.addMonsterToGrid(worm);
+//
+//        do {
+//                Random rnd = new Random();
+//                int ap = 300 + rnd.nextInt(400);
+//                int hp = 500 + rnd.nextInt(1000);
+//            int monsterType = rnd.nextInt(3);
+//            switch (monsterType) {
+//                case 0:
+//                    Ogre tempOgre = new Ogre(ap, hp);
+//                    newMap.addMonsterToGrid(tempOgre);
+//                    break;
+//                case 1:
+//                    Worm tempWorm = new Worm();
+//                    newMap.addMonsterToGrid(tempWorm);
+//                    break;
+//                case 2:
+//                    Dragon tempDragon = new Dragon(ap, hp);
+//                    newMap.addMonsterToGrid(tempDragon);
+//                    break;
+//
+//                default:
+//            }
+//        }while(newMap.getMonsterListSize()<15);
+//    }
 
     @Test
     public void testCreateNewMapObject() {
