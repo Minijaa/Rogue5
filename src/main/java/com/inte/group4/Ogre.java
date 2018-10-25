@@ -10,8 +10,8 @@ public class Ogre extends Monster {
 
 
 
-    public Ogre(){
-        super(OGREAP,OGREHP);
+    public Ogre(Point p){
+        super(OGREAP,OGREHP, p);
 
     }
 

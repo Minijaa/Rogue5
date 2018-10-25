@@ -3,11 +3,14 @@ package com.inte.group4;
 import java.awt.*;
 import java.util.Random;
 
+
 public class Worm extends Monster {
     //private Point monsterPosition;
+    private static final int WORMHP= 100;
+    private static final int WORMAP= 300;
 
-    public Worm() {
-        super(10, 14);
+    public Worm(Point p) {
+        super(10, 14,p);
     }
 
     @Override
