@@ -38,9 +38,16 @@ public class Location {
         return mapChar;
     }
 
-    public void setMapChar(char mapChar) {
-        this.mapChar = mapChar;
+    public void setMapChar() {
+        if (monster != null) {
+            mapChar = monster.getMonsterChar();
+        } else if (isVisited) {
+            mapChar = visitedLocationChar;
+        }else{
+            mapChar = unvisitedLocationChar;
+        }
     }
+
 
     public void setTreasure(Item item) {
         this.treasure = item;
@@ -60,7 +67,6 @@ public class Location {
 
     public Monster setMonster(Monster monster) {
         this.monster = monster;
-
         return monster;
     }
 
@@ -80,19 +86,15 @@ public class Location {
 
     public void setVisited(boolean visited) {
         isVisited = visited;
-        if (visited){
-            setMapChar(visitedLocationChar);
-        }else {
-            setMapChar(unvisitedLocationChar);
-        }
+
     }
 
-    public boolean isVisited(){
+    public boolean isVisited() {
         return isVisited;
     }
 
     public void setPlayerAtLocation() {
-        setMapChar(playerAtLocationChar);
+        mapChar = playerAtLocationChar;
     }
 
     public Point getPosition() {

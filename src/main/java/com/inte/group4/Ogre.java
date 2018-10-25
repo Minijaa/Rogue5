@@ -9,10 +9,9 @@ public class Ogre extends Monster {
     private static final int OGREAP= 100;
 
 
-
     public Ogre(Point p){
         super(OGREAP,OGREHP, p);
-        //monsterChar = 'G';
+        monsterChar = 'G';
 
     }
 

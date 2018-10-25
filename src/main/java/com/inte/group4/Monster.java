@@ -6,6 +6,11 @@ abstract public class Monster extends Sprite {
     private boolean isUpOrLeft;
     Point currentMonsterCords;
     char monsterChar;
+    private int deadLockCounter;
+
+    public boolean isUpOrLeft() {
+        return isUpOrLeft;
+    }
 
     public void setMonsterChar(char monsterChar) {
         this.monsterChar = monsterChar;
@@ -47,6 +52,14 @@ abstract public class Monster extends Sprite {
 
     public char getMonsterChar() {
         return monsterChar;
+    }
+
+    public int getDeadLockCounter() {
+        return deadLockCounter;
+    }
+
+    public void setDeadLockCounter(int deadLockCounter) {
+        this.deadLockCounter = deadLockCounter;
     }
 
 }

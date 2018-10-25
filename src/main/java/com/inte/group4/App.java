@@ -49,6 +49,8 @@ public class App {
 			default:
 				System.out.println("Wrong input, try again!");
 			}
+			map.moveAllMonsters();
+
 			if (running) {
 				travelDirection(newX, newY);
 				running = evaluatePlayerLocation();
@@ -128,7 +130,6 @@ public class App {
 				}
 			}
 		}
-
 	}
 
 	public boolean askIfQuit() {
@@ -157,6 +158,7 @@ public class App {
 		// Control if newX and newY are within the grid system, if not no movey move.
 		Location oldLocation = map.getActivePlayerLocation();
 		oldLocation.setVisited(true);
+		oldLocation.setMapChar();
 		map.setActivePlayerLocation(newX, newY);
 	}
 
