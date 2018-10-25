@@ -1,6 +1,6 @@
 package com.inte.group4;
 
-public class Potion extends Item {
+public class Potion extends Item implements Comparable<Potion> {
 	private static final int MASSIVE_POTION_VALUE = 1000000;
 	private static final int MAJOR_POTION_VALUE = 500;
 	private static final int MINOR_POTION_VALUE = 200;
@@ -16,6 +16,7 @@ public class Potion extends Item {
 		}
 	}
 
+
 	private String determineType() {
 		String type;
 		if (currentHpIncrease == MINOR_POTION_VALUE) {
@@ -30,6 +31,16 @@ public class Potion extends Item {
 
 	public int getHpIncreaseValue() {
 		return currentHpIncrease;
+	}
+
+	@Override
+	public int compareTo(Potion other){
+		if(currentHpIncrease<other.currentHpIncrease){
+			return -1;
+		}else if (currentHpIncrease>other.currentHpIncrease){
+			return 1;
+		}
+		return 0;
 	}
 
 	@Override

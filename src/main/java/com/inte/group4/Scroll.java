@@ -1,6 +1,6 @@
 package com.inte.group4;
 
-public class Scroll extends Item {
+public class Scroll extends Item implements Comparable<Scroll>{
 	private int maxApBuff;
 	private int maxHpBuff;
 
@@ -42,8 +42,20 @@ public class Scroll extends Item {
 		return type;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Scroll of " + determineType();
+	}
+
+	@Override
+	public int compareTo(Scroll other) {
+		if(maxApBuff==0&& maxHpBuff>0){
+			return -1;
+		}else if (maxHpBuff==0&& maxApBuff>0){
+			return 0;
+		}else{
+			return 1;
+		}
 	}
 }

@@ -2,7 +2,7 @@ package com.inte.group4;
 
 import java.util.Random;
 
-public class Bandage extends Item {
+public class Bandage extends Item implements Comparable<Bandage>{
 	private int hpIncreaseValue;
 
 	public Bandage() {
@@ -10,6 +10,11 @@ public class Bandage extends Item {
 		int baseValue = 100;
 		hpIncreaseValue = baseValue + rnd.nextInt(400);
 	}
+
+	//for test
+	public void setHpIncreaseValue(int hpToIncrease){
+        hpIncreaseValue= hpToIncrease;
+    }
 
 	private String determineType() {
 		String type;
@@ -22,6 +27,15 @@ public class Bandage extends Item {
 		}
 		return type;
 	}
+    @Override
+	public int compareTo(Bandage other){
+	    if(hpIncreaseValue<other.hpIncreaseValue){
+	        return -1;
+        }else if (hpIncreaseValue>other.hpIncreaseValue){
+            return 1;
+        }
+        return 0;
+    }
 
 	@Override
 	public String toString() {
