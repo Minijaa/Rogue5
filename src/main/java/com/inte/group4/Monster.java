@@ -23,7 +23,6 @@ abstract public class Monster extends Sprite {
 
     abstract public Point moveMonster();
 
-
     public Point getCurrentMonsterCords() {
         return currentMonsterCords;
     }
@@ -36,10 +35,6 @@ abstract public class Monster extends Sprite {
     public String toString() {
         String str = super.toString() + " cords: " + currentMonsterCords.x + ":" + currentMonsterCords.y;
         return str;
-    }
-
-    public void setDirection(String left) {
-
     }
 
     public boolean getIsUpOrLeft() {
@@ -58,8 +53,11 @@ abstract public class Monster extends Sprite {
         return deadLockCounter;
     }
 
-    public void setDeadLockCounter(int deadLockCounter) {
-        this.deadLockCounter = deadLockCounter;
+    public void resetDeadLockCounter() {
+        deadLockCounter = 0;
     }
 
+    public void incrementDeadLockCounter() {
+        deadLockCounter++;
+    }
 }

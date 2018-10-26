@@ -46,6 +46,8 @@ public class App {
 			case "Q":
 				running = askIfQuit();
 				break;
+			case "Å": //Stand still
+				break;
 			default:
 				System.out.println("Wrong input, try again!");
 			}

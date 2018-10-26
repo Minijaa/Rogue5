@@ -9,9 +9,11 @@ public class Map {
     private Location activePlayerLocation;
     private ArrayList<Monster> monsterList = new ArrayList<Monster>();
     private int gridSize;
+    private static final int X_AXIS_MAP_SIZE = 10;
+    private static final int Y_AXIS_MAP_SIZE = 10;
 
     public Map() {
-        mapGrid = new Location[10][10];
+        mapGrid = new Location[X_AXIS_MAP_SIZE][Y_AXIS_MAP_SIZE];
         createGrid();
         createAndPlaceMonsters();
         printGrid();
@@ -110,23 +112,23 @@ public class Map {
         return cords;
     }
 
-    public void addMonsterToGrid(Monster monster) {
-
-        if (monsterList.size() < 15) {
-
-            Point cords = new Point(rndCords());
-            Location location = getLocationFromPoint(cords);
-            if (location.getMonster() == null) {
-                monster.setCurrentMonsterCords(cords);
-                location.setMonster(monster);
-                addMonsterToList(monster);
-                //System.out.println(monsterList.size());
-                System.out.println(monster.toString());
-            }
-        } else {
-            throw new IllegalArgumentException("There can only be 15 monsters in a map");
-        }
-    }
+//    public void addMonsterToGrid(Monster monster) {
+//
+//        if (monsterList.size() < 15) {
+//
+//            Point cords = new Point(rndCords());
+//            Location location = getLocationFromPoint(cords);
+//            if (location.getMonster() == null) {
+//                monster.setCurrentMonsterCords(cords);
+//                location.setMonster(monster);
+//                addMonsterToList(monster);
+//                //System.out.println(monsterList.size());
+//                System.out.println(monster.toString());
+//            }
+//        } else {
+//            throw new IllegalArgumentException("There can only be 15 monsters in a map");
+//        }
+//    }
 
     public Monster getMonsterFromList(int index) {
         return monsterList.get(index);
@@ -138,12 +140,23 @@ public class Map {
 
     public void moveAllMonsters() {
         for (Monster m : monsterList) {
-            if (m instanceof Dragon) {
-                Point oldPoint = m.getCurrentMonsterCords();
-                System.out.println("OLDPOINT: " + oldPoint.x + " " + oldPoint.y);
-                Point newPoint = m.moveMonster();
+            Point oldPoint = m.getCurrentMonsterCords();
+            System.out.println("Monster Type:" + m.getClass().getSimpleName() + " OLDPOINT: " + oldPoint.x + " " + oldPoint.y);
+            Point newPoint = m.moveMonster();
+            if (getLocationFromPoint(newPoint).getMonster() != null || getLocationFromPoint(newPoint).equals(activePlayerLocation)) {
+                if (m.getDeadLockCounter() == 3) {
+                    m.setUpOrLeft(!m.getIsUpOrLeft());
+                    m.resetDeadLockCounter();
+                    System.out.println("Monster Type:" + m.getClass().getSimpleName() + " is tired of waiting. Tries to changes direction!");
+                } else {
+                    m.setCurrentMonsterCords(oldPoint);
+                    m.incrementDeadLockCounter();
+                    System.out.println("Monster Type:" + m.getClass().getSimpleName() + " STOPS and counts to: " + m.getDeadLockCounter());
+                }
+            } else {
+                m.resetDeadLockCounter();
                 m.setCurrentMonsterCords(newPoint);
-                System.out.println("NEWPOINT " + newPoint.x + " " + newPoint.y);
+                System.out.println("Monster Type:" + m.getClass().getSimpleName() + " NEWPOINT " + newPoint.x + " " + newPoint.y);
                 getLocationFromPoint(oldPoint).setMonster(null);
                 getLocationFromPoint(oldPoint).setMapChar();
                 getLocationFromPoint(newPoint).setMonster(m);
