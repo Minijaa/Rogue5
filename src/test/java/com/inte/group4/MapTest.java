@@ -9,7 +9,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
-    Map newMap;
+    Map newMap = new Map();
     Dragon dragon;
     Ogre ogre;
     Worm worm;
@@ -59,6 +59,7 @@ class MapTest {
         assertEquals(100, newMap.gridSize());
 
     }
+    //Only works if we don't print monsters
     @Test
     public void testPrintGrid(){
         String actualOutput = newMap.printGrid();
@@ -88,36 +89,57 @@ class MapTest {
     }
     //Kristina
     @Test
-    public void testThatMonsterIsAdded(){
-        Monster monsterInArrayList = newMap.getMonsterFromList(5);
-        Point cords = monsterInArrayList.getCurrentMonsterCords();
-        Location location = newMap.getLocationFromPoint(cords);
-        Monster monsterAtLocation = location.getMonster();
-        assertEquals(monsterAtLocation, monsterInArrayList);
+    public void testMonsterIsTheSameInListAndOnGrid(){
+        Monster monsterInArrayList = newMap.getMonsterFromList(13);
+        Point expectedMonsterPoint = new Point(6,0);
+        Location expectedMonsterLocation = newMap.getLocationFromPoint(expectedMonsterPoint);
+        Monster expectedMonsterAtLocation = expectedMonsterLocation.getMonster();
+        assertEquals(expectedMonsterAtLocation,monsterInArrayList);
     }
     //Kristina
     @Test
     public void testRndCords(){
-        Point pointToTest = new Point(newMap.rndCords());
         int x,y;
         int belowZero = -1;
         int above9 = 10;
 
-        x = pointToTest.x;
-        y = pointToTest.y;
-        assertNotEquals(x, belowZero);
-        assertNotEquals(x, above9);
-        assertNotEquals(y, belowZero);
-        assertNotEquals(y, above9);
+        for(int i = 0; i < 100; i++){
+            Point pointToTest = new Point(newMap.rndCords());
+            x = pointToTest.x;
+            y = pointToTest.y;
+            assertNotEquals(x, belowZero);
+            assertNotEquals(x, above9);
+            assertNotEquals(y, belowZero);
+            assertNotEquals(y, above9);
+        }
     }
     //Kristina
     @Test
-    public void testAddMonsterToGrid(){
-        Monster monsterInArrayList = newMap.getMonsterFromList(7);
-        Point point = monsterInArrayList.getCurrentMonsterCords();
-        Location location = newMap.getLocationFromPoint(point);
-        Monster monsterAtLocation = location.getMonster();
-        assertEquals(monsterAtLocation.getCurrentMonsterCords(), monsterInArrayList.getCurrentMonsterCords());
-        assertEquals(point, location.getMonster().getCurrentMonsterCords() );
+    public void testMoveAllMonsters(){
+        Monster monsterInArrayList = newMap.getMonsterFromList(5);
+        Location originalLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
+        newMap.moveAllMonsters();
+        Point pointAfterMove = monsterInArrayList.getCurrentMonsterCords();
+        Location locationAfterMove = newMap.getLocationFromPoint(pointAfterMove);
+        Point expectedPoint = new Point(6,5);
+        Location expectedLocation = newMap.getLocationFromPoint(expectedPoint);
+        assertEquals(expectedLocation,locationAfterMove);
+        assertEquals(expectedPoint,pointAfterMove);
+    }
+    //Kristina
+    @Test
+    public void testMapCharUpdateAtNewLocationOnMove(){
+        Monster monsterInArrayList = newMap.getMonsterFromList(8);
+        newMap.moveAllMonsters();
+        Location newLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
+        assertEquals(monsterInArrayList.getMonsterChar(), newLocation.getMapChar());
+    }
+    //Kristina
+    @Test
+    public void testMapCharUpdateAtOldLocationOnMove(){
+        Monster monsterInArrayList = newMap.getMonsterFromList(14);
+        Location oldLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
+        newMap.moveAllMonsters();
+        assertNotEquals(monsterInArrayList.getMonsterChar(),oldLocation.getMapChar());
     }
 }
