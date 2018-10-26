@@ -17,46 +17,47 @@ class DragonTest {
     }
 
     @Test
-    public void testReturnNewPoint() {
-        Point oldPoint = testDragon.getCurrentMonsterCords();
-        int oldX = oldPoint.x;
-        int oldY = oldPoint.y;
-        Point newPoint = testDragon.moveMonster();
-        int newX = newPoint.x;
-        int newY = newPoint.y;
-        assertTrue(newX == (oldX - 1) && newY == (oldY + 1));
+    public void testCorrectDragonCords() {
+        Point dragonPoint = testDragon.getCurrentMonsterCords();
+        Point expectedPoint = new Point(2, 3);
+        assertEquals(expectedPoint, dragonPoint);
     }
+
+    @Test
+    public void testReturnNewPoint() {
+        Point newPoint = testDragon.moveMonster();
+        Point expectedPoint = new Point(1, 4);
+        assertEquals(expectedPoint, newPoint);
+    }
+
     @Test
     public void testRunInToTopLeft() {
         Dragon testTopLeftDragon = new Dragon(new Point(0, 7));
         testTopLeftDragon.setUpOrLeft(true);
-        Point oldPoint = testTopLeftDragon.getCurrentMonsterCords();
-        int oldX = oldPoint.x;
-        int oldY = oldPoint.y;
-        Point newPoint = testTopLeftDragon.moveMonster();
-        int newX = newPoint.x;
-        int newY = newPoint.y;
-        assertTrue(newX == (oldX + 1) && newY == (oldY - 1));
+        Point newDragonPoint = testTopLeftDragon.moveMonster();
+        Point expectedPoint = new Point(1, 6);
+        assertEquals(expectedPoint, newDragonPoint);
     }
 
     @Test
     public void testRunInToBottomR() {
         Dragon testBottomRightDragon = new Dragon(new Point(8, 0));
         testBottomRightDragon.setUpOrLeft(false);
-        Point oldPoint = testBottomRightDragon.getCurrentMonsterCords();
-        int oldX = oldPoint.x;
-        int oldY = oldPoint.y;
-        Point newPoint = testBottomRightDragon.moveMonster();
-        int newX = newPoint.x;
-        int newY = newPoint.y;
-        assertTrue(newX == (oldX - 1) && newY == (oldY + 1));
+        Point newDragonPoint = testBottomRightDragon.moveMonster();
+        Point expectedPoint = new Point(7, 1);
+        assertEquals(expectedPoint, newDragonPoint);
     }
 
     @Test
-    public void testMovedToNonePlayerLocation() {
-        //dragon.Move();
-        //assertNotEquals(Map.getActivePlayerLocation(), dragon.getCurrentMonsterLocation());
-
+    public void testExtendedMovement() {
+        Dragon extendedMovementdragon = new Dragon(new Point(9, 0));
+        extendedMovementdragon.setUpOrLeft(true);
+        for (int i = 0; i < 20; i++) {
+            extendedMovementdragon.setCurrentMonsterCords(extendedMovementdragon.moveMonster());
+        }
+        Point newDragonPoint = extendedMovementdragon.getCurrentMonsterCords();
+        Point expectedPoint = new Point(7, 2);
+        assertEquals(expectedPoint, newDragonPoint);
     }
 
 

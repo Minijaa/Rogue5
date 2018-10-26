@@ -14,12 +14,8 @@ public class Dragon extends Monster {
     @Override
     public Point moveMonster() {
         Point currentPoint = this.getCurrentMonsterCords();
+        checkforWall(currentPoint);
         Point newPoint;
-        if (currentPoint.x == 0 || currentPoint.y == 9) {
-            this.setUpOrLeft(false);
-        } else if (currentPoint.y == 0 || currentPoint.x == 9) {
-            this.setUpOrLeft(true);
-        }
         if (this.getIsUpOrLeft()) {
             int newX = currentPoint.x - 1;
             int newY = currentPoint.y + 1;
@@ -31,6 +27,14 @@ public class Dragon extends Monster {
         }
         //System.out.print(newPoint);
         return newPoint;
+    }
+
+    public void checkforWall(Point currentPoint) {
+        if (currentPoint.x == 0 || currentPoint.y == 9) {
+            this.setUpOrLeft(false);
+        } else if (currentPoint.x == 9 || currentPoint.y == 0) {
+            this.setUpOrLeft(true);
+        }
     }
 
     public String toString() {
