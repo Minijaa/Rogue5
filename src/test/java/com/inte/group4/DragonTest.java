@@ -12,7 +12,7 @@ class DragonTest {
 
     @BeforeEach
     void setUp() {
-        testDragon = new Dragon(new Point(8, 0));
+        testDragon = new Dragon(new Point(2, 3));
         testDragon.setUpOrLeft(true);
     }
 
@@ -37,6 +37,19 @@ class DragonTest {
         int newX = newPoint.x;
         int newY = newPoint.y;
         assertTrue(newX == (oldX + 1) && newY == (oldY - 1));
+    }
+
+    @Test
+    public void testRunInToBottomR() {
+        Dragon testBottomRightDragon = new Dragon(new Point(8, 0));
+        testBottomRightDragon.setUpOrLeft(false);
+        Point oldPoint = testBottomRightDragon.getCurrentMonsterCords();
+        int oldX = oldPoint.x;
+        int oldY = oldPoint.y;
+        Point newPoint = testBottomRightDragon.moveMonster();
+        int newX = newPoint.x;
+        int newY = newPoint.y;
+        assertTrue(newX == (oldX - 1) && newY == (oldY + 1));
     }
 
     @Test
