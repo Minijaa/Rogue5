@@ -16,11 +16,7 @@ public class Worm extends Monster {
     public Point moveMonster() {
         Point oldPosition = currentMonsterCords;
         Point newPosition;
-        if (oldPosition.y == 0) {
-            setUpOrLeft(true);
-        } else if (oldPosition.y == 9) {
-            setUpOrLeft(false);
-        }
+        changeDirectionAtBoundary(oldPosition);
         if (isUpOrLeft()) {
             newPosition = new Point(oldPosition.x, (oldPosition.y + 1));
         } else {
@@ -28,6 +24,14 @@ public class Worm extends Monster {
         }
         currentMonsterCords = newPosition;
         return newPosition;
+    }
+
+    private void changeDirectionAtBoundary(Point oldPosition) {
+        if (oldPosition.y == 0) {
+            setUpOrLeft(true);
+        } else if (oldPosition.y == 9) {
+            setUpOrLeft(false);
+        }
     }
 
     public String toString() {
