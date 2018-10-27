@@ -19,7 +19,7 @@ abstract public class Sprite {
     }
 
     public final int attack() {
-        return 0;
+        return getAp();
     }
 
     public final void decreaseHp(int attack) {

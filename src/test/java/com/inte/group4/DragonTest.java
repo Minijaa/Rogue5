@@ -59,6 +59,4 @@ class DragonTest {
         Point expectedPoint = new Point(7, 2);
         assertEquals(expectedPoint, newDragonPoint);
     }
-
-
 }

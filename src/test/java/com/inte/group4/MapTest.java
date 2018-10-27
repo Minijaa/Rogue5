@@ -81,18 +81,15 @@ class MapTest {
     @Test
     public void testSetActivePlayerLocation(){
         newMap.setActivePlayerLocation(3,5);
-
         Location playerLocation = newMap.getLocationFromPoint(new Point(3,5));
-
         assertEquals('X',playerLocation.getMapChar());
-
     }
+
     //Kristina
     @Test
     public void testMonsterIsTheSameInListAndOnGrid(){
         Monster monsterInArrayList = newMap.getMonsterFromList(13);
-        Point expectedMonsterPoint = new Point(6,0);
-        Location expectedMonsterLocation = newMap.getLocationFromPoint(expectedMonsterPoint);
+        Location expectedMonsterLocation = newMap.getLocationFromPoint(new Point(6,0));
         Monster expectedMonsterAtLocation = expectedMonsterLocation.getMonster();
         assertEquals(expectedMonsterAtLocation,monsterInArrayList);
     }
@@ -117,7 +114,7 @@ class MapTest {
     @Test
     public void testMoveAllMonsters(){
         Monster monsterInArrayList = newMap.getMonsterFromList(5);
-        Location originalLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
+       // Location originalLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
         newMap.moveAllMonsters();
         Point pointAfterMove = monsterInArrayList.getCurrentMonsterCords();
         Location locationAfterMove = newMap.getLocationFromPoint(pointAfterMove);
@@ -141,5 +138,12 @@ class MapTest {
         Location oldLocation = newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
         newMap.moveAllMonsters();
         assertNotEquals(monsterInArrayList.getMonsterChar(),oldLocation.getMapChar());
+    }
+    //fill out
+    @Test
+    public void testMultipleMonsterMoves(){
+        for(int i=0; i<5;i++){
+            newMap.moveAllMonsters();
+        }
     }
 }

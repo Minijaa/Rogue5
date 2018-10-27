@@ -3,10 +3,12 @@ package com.inte.group4;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AppTest{
+public class AppTest {
     App newApp;
 
     @BeforeEach
@@ -14,13 +16,18 @@ public class AppTest{
         newApp = new App();
     }
 
-
     @Test
-    public void testNormalizeString(){
+    public void testNormalizeString() {
         String actualOutput = newApp.normalizeString(" unNormalizedString");
         String expectedOutput = "Unnormalizedstring";
 
-        assertEquals(expectedOutput,actualOutput);
+        assertEquals(expectedOutput, actualOutput);
+
+    }
+
+    @Test
+    public void testValidPlayerMove() {
+
 
     }
 

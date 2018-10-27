@@ -23,7 +23,7 @@ public class Map {
         //Adding Ogres
         mapGrid[4][5].setMonster(new Ogre(new Point(4, 5))).setUpOrLeft(true);
         mapGrid[2][2].setMonster(new Ogre(new Point(2, 2))).setUpOrLeft(false);
-        mapGrid[9][2].setMonster(new Ogre(new Point(9, 2))).setUpOrLeft(true);
+        mapGrid[9][1].setMonster(new Ogre(new Point(9, 3))).setUpOrLeft(true);
         mapGrid[1][4].setMonster(new Ogre(new Point(1, 4))).setUpOrLeft(false);
         mapGrid[7][7].setMonster(new Ogre(new Point(7, 7))).setUpOrLeft(false);
 
@@ -74,6 +74,7 @@ public class Map {
             }
         }
         setActivePlayerLocation(4, 0);
+        System.out.println("player at 4;0");
     }
 
     public void setActivePlayerLocation(int x, int y) {
@@ -95,6 +96,12 @@ public class Map {
 
     public void addMonsterToList(Monster monster) {
         monsterList.add(monster);
+    }
+
+    public void removeMonster(Monster monsterToBeRemoved){
+        Location location = this.getLocationFromPoint(monsterToBeRemoved.getCurrentMonsterCords());
+        location.setMonster(null);
+        removeMonsterFromList(monsterToBeRemoved);
     }
 
     public void removeMonsterFromList(Monster monster) {
@@ -141,22 +148,22 @@ public class Map {
     public void moveAllMonsters() {
         for (Monster m : monsterList) {
             Point oldPoint = m.getCurrentMonsterCords();
-            System.out.println("Monster Type:" + m.getClass().getSimpleName() + " OLDPOINT: " + oldPoint.x + " " + oldPoint.y);
+           // System.out.println("Monster Type:" + m.getClass().getSimpleName() + " OLDPOINT: " + oldPoint.x + " " + oldPoint.y);
             Point newPoint = m.moveMonster();
             if (getLocationFromPoint(newPoint).getMonster() != null || getLocationFromPoint(newPoint).equals(activePlayerLocation)) {
                 if (m.getDeadLockCounter() == 3) {
                     m.setUpOrLeft(!m.getIsUpOrLeft());
                     m.resetDeadLockCounter();
-                    System.out.println("Monster Type:" + m.getClass().getSimpleName() + " is tired of waiting. Tries to changes direction!");
+                  //  System.out.println("Monster Type:" + m.getClass().getSimpleName() + " is tired of waiting. Tries to changes direction!");
                 } else {
                     m.setCurrentMonsterCords(oldPoint);
                     m.incrementDeadLockCounter();
-                    System.out.println("Monster Type:" + m.getClass().getSimpleName() + " STOPS and counts to: " + m.getDeadLockCounter());
+                  //  System.out.println("Monster Type:" + m.getClass().getSimpleName() + " STOPS and counts to: " + m.getDeadLockCounter());
                 }
             } else {
                 m.resetDeadLockCounter();
                 m.setCurrentMonsterCords(newPoint);
-                System.out.println("Monster Type:" + m.getClass().getSimpleName() + " NEWPOINT " + newPoint.x + " " + newPoint.y);
+              //  System.out.println("Monster Type:" + m.getClass().getSimpleName() + " NEWPOINT " + newPoint.x + " " + newPoint.y);
                 getLocationFromPoint(oldPoint).setMonster(null);
                 getLocationFromPoint(oldPoint).setMapChar();
                 getLocationFromPoint(newPoint).setMonster(m);
