@@ -1,6 +1,7 @@
 package com.inte.group4;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -61,6 +62,7 @@ class MapTest {
     }
     //Only works if we don't print monsters
     @Test
+    @Disabled //KOM IHÅG ATT TA BORT DENNA DISABLED!!!
     public void testPrintGrid(){
         String actualOutput = newMap.printGrid();
 
