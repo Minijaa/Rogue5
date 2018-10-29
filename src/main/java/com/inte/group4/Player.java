@@ -21,7 +21,7 @@ public class Player extends Sprite {
     // Hur testa denna metod? Endast size, vi kan inte testa vad som skrivs ut?
     public int getInventorySize() {
         int inventorySize = inventory.size();
-        System.out.println("Inventory contains " + inventorySize + " items, out of " + MAX_INVENTORY);
+        //System.out.println("Inventory contains " + inventorySize + " items, out of " + MAX_INVENTORY);
         return inventory.size();
     }
 
@@ -34,12 +34,13 @@ public class Player extends Sprite {
         if (newItem != null) {
             if (inventory.size() < MAX_INVENTORY) {
                 inventory.add(newItem);
-                returnValue = "";
+                returnValue = "You found " + newItem.toString();
             } else {
                 returnValue = "Cannot add item, inventory is full!";
-                System.out.println(returnValue);
+
             }
         }
+        System.out.println(returnValue);
         return returnValue;
     }
 
@@ -72,16 +73,23 @@ public class Player extends Sprite {
     public int useItem(Item itemToUse) {
         if (itemToUse instanceof Potion) {
             Potion potionToUse = (Potion) itemToUse;
-            setCurrentHp(getCurrentHp() + potionToUse.getHpIncreaseValue());
+            addToCurrentHp(potionToUse.getHpIncreaseValue());
+            System.out.println("Used "+ potionToUse.toString() + ", Player stats: AP: "+ getAp()+ " HP: " + getCurrentHp() + "/" + getMaxHp());
+            inventory.remove(potionToUse);
             return 1;
         } else if (itemToUse instanceof Bandage) {
             Bandage bandageToUse = (Bandage) itemToUse;
-            setCurrentHp(getCurrentHp() + bandageToUse.getHpIncreaseValue());
+            addToCurrentHp(bandageToUse.getHpIncreaseValue());
+            System.out.println("Used "+ bandageToUse.toString() + ", Player stats: AP: "+ getAp()+ " HP: " + getCurrentHp() + "/" + getMaxHp());
+            inventory.remove(bandageToUse);
             return 1;
         } else if (itemToUse instanceof Scroll) {
             Scroll scrollToUse = (Scroll) itemToUse;
             addToMaxHp(scrollToUse.getMaxHpBuff());
+            addToCurrentHp(scrollToUse.getMaxHpBuff());
             addToAp(scrollToUse.getMaxApBuff());
+            System.out.println("Used "+ scrollToUse.toString() + ", Player stats: AP: "+ getAp()+ " HP: " + getCurrentHp() + "/" + getMaxHp());
+            inventory.remove(scrollToUse);
             return 1;
         } else {
             return 0;

@@ -10,7 +10,7 @@ public class App {
 
     private void setUp() {
         map = new Map();
-        player = new Player(100, 100000);
+        player = new Player(100, 1000);
         runCommandLoop();
     }
 
@@ -110,11 +110,11 @@ public class App {
             String cmd = normalizeString(readLine());
             switch (cmd) {
                 case "A":
-                    //System.out.println("Attack");
                     playerAttacks();
                     break;
                 case "P":
-                    System.out.println("Potion");
+                    //System.out.println("Potion");
+                    usePotionInBattle();
                     break;
                 case "Q":
                     running = askIfQuit();
@@ -127,8 +127,17 @@ public class App {
             }
         }
     }
+    private void usePotionInBattle(){
+        if(player.getItemByIndex(0) != null && player.getItemByIndex(0) instanceof Potion){
+            Potion pot = (Potion)player.getItemByIndex(0);
+            player.useItem(pot);
+            monsterAttacks(map.getActivePlayerLocation().getMonster());
+        }else{
+            System.out.println("You don't have a potion, attack!");
+            playerAttacks();
+        }
+    }
 
-    //we might need to redo this so the player can take a pot before every attack if they so choose
     private void playerAttacks() {
         Monster monsterToKill = map.getActivePlayerLocation().getMonster();
         if (player.isAlive() && monsterToKill.isAlive()) {
@@ -139,15 +148,19 @@ public class App {
                 System.out.println("You slayed the " + monsterToKill.getClass().getSimpleName() + "!");
                 map.removeMonster(monsterToKill);
             }else{
-                getMonsterHealthStatus(monsterToKill);
-                player.decreaseHp(monsterToKill.attack());
-                System.out.println("The " + monsterToKill.getClass().getSimpleName() + " hit you for " + monsterToKill.getAp() + " dmg!");
-                //evaluatePlayerLocation();
-                getPlayerHealthStatus();
-
+                monsterAttacks(monsterToKill);
             }
         }
     }
+
+    private void monsterAttacks(Monster monsterToKill) {
+        getMonsterHealthStatus(monsterToKill);
+        player.decreaseHp(monsterToKill.attack());
+        System.out.println("The " + monsterToKill.getClass().getSimpleName() + " hit you for " + monsterToKill.getAp() + " dmg!");
+        //evaluatePlayerLocation();
+        getPlayerHealthStatus();
+    }
+
 
     private void getTreasure() {
         Location activeLocation = map.getActivePlayerLocation();
@@ -184,6 +197,10 @@ public class App {
                     Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
                     player.useItem(gottenItem);
                     exitValue = player.printInventory();
+                    if (exitValue == 0){
+                        break;
+                    }
+                    System.out.println(exitValue + ": Exit inventory");
                     pickedItemIndex = keyboard.nextInt();
                 }
             }

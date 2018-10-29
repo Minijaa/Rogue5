@@ -58,9 +58,17 @@ abstract public class Sprite {
     public void addToMaxHp(int hpToAddToMaxHp) {
         maxHp += hpToAddToMaxHp;
     }
-    
-	public void addToAp(int apToAddtoAp) {
-		ap += apToAddtoAp;
-		
-	}
+
+    public void addToCurrentHp(int hpToAddToCurrentHp) {
+        if ((currentHp + hpToAddToCurrentHp) > maxHp) {
+            currentHp = maxHp;
+        } else {
+            currentHp += hpToAddToCurrentHp;
+        }
+    }
+
+    public void addToAp(int apToAddtoAp) {
+        ap += apToAddtoAp;
+
+    }
 }
