@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Ogre extends Monster {
     private int mockAttackPoints;
-    private static final int OGREHP= 100;
+    private static final int OGREHP= 300;
     private static final int OGREAP= 100;
     private boolean direction;
 

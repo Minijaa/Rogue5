@@ -41,7 +41,7 @@ public class Location {
     public void setMapChar() {
         if (monster != null) {
             mapChar = monster.getMonsterChar();
-        } else if (isVisited) {
+        }else if (isVisited) {
             mapChar = visitedLocationChar;
         }else{
             mapChar = unvisitedLocationChar;

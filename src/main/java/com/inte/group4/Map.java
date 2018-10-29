@@ -23,7 +23,7 @@ public class Map {
         //Adding Ogres
         mapGrid[4][5].setMonster(new Ogre(new Point(4, 5))).setUpOrLeft(true);
         mapGrid[2][2].setMonster(new Ogre(new Point(2, 2))).setUpOrLeft(false);
-        mapGrid[9][1].setMonster(new Ogre(new Point(9, 3))).setUpOrLeft(true);
+        mapGrid[9][3].setMonster(new Ogre(new Point(9, 3))).setUpOrLeft(true);
         mapGrid[1][4].setMonster(new Ogre(new Point(1, 4))).setUpOrLeft(false);
         mapGrid[7][7].setMonster(new Ogre(new Point(7, 7))).setUpOrLeft(false);
 
@@ -106,6 +106,7 @@ public class Map {
 
     public void removeMonsterFromList(Monster monster) {
         monsterList.remove(monster);
+
     }
 
 

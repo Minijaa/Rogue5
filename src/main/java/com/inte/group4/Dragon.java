@@ -3,8 +3,8 @@ package com.inte.group4;
 import java.awt.*;
 
 public class Dragon extends Monster {
-    private static final int DRAGONHP = 400;
-    private static final int DRAGONAP = 400;
+    private static final int DRAGONHP = 500;
+    private static final int DRAGONAP = 300;
 
     public Dragon(Point p) {
         super(DRAGONAP, DRAGONHP, p);

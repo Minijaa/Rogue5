@@ -4,8 +4,8 @@ import java.awt.*;
 
 
 public class Worm extends Monster {
-    private static final int WORMHP = 100;
-    private static final int WORMAP = 300;
+    private static final int WORMHP = 200;
+    private static final int WORMAP = 400;
 
     public Worm(Point p) {
         super(WORMAP, WORMHP, p);

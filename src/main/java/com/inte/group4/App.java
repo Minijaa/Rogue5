@@ -10,7 +10,7 @@ public class App {
 
     private void setUp() {
         map = new Map();
-        player = new Player(20, 1000);
+        player = new Player(100, 100000);
         runCommandLoop();
     }
 
@@ -68,7 +68,7 @@ public class App {
     }
 
     private boolean evaluatePlayerLocation() {
-        if (checkMonsterAtLocation()) {
+        if (checkMonsterAtLocation() && player.isAlive()) {
             fight();
         }
         if (player.isAlive()) {
@@ -91,18 +91,22 @@ public class App {
             return false;
         }
     }
-    public void getPlayerHealthStatus(){
+
+    public void getPlayerHealthStatus() {
         System.out.println("Player health: " + player.getCurrentHp() + "/" + player.getMaxHp());
     }
-    public void getMonsterHealthStatus(Monster monster){
+
+    public void getMonsterHealthStatus(Monster monster) {
         System.out.println("Monster health: " + monster.getCurrentHp() + "/" + monster.getMaxHp());
     }
+
     private void fight() {
-        // fight-switch etc
         boolean running = true;
+        Monster monsterToKill = map.getActivePlayerLocation().getMonster();
         System.out.println();
+        System.out.println("It's " + monsterToKill.getClass().getSimpleName()+" smashing time!");
         while (running) {
-            System.out.println("Fight the monster! Press A to attack or P to take a health potion!");
+            System.out.println("Fight the " + monsterToKill.getClass().getSimpleName()+ "! Press A to attack or P to take a health potion!");
             String cmd = normalizeString(readLine());
             switch (cmd) {
                 case "A":
@@ -118,28 +122,29 @@ public class App {
                 default:
                     System.out.println("Wrong input, try again!");
             }
-            if(map.getActivePlayerLocation().getMonster() == null){
+            if (map.getActivePlayerLocation().getMonster() == null) {
                 break;
             }
         }
     }
+
     //we might need to redo this so the player can take a pot before every attack if they so choose
     private void playerAttacks() {
-        boolean combatantsAlive = true;
         Monster monsterToKill = map.getActivePlayerLocation().getMonster();
-        while (combatantsAlive) {
-            monsterToKill.decreaseHp(player.attack());
+        if (player.isAlive() && monsterToKill.isAlive()) {
             getPlayerHealthStatus();
-            getMonsterHealthStatus(monsterToKill);
-            player.decreaseHp(monsterToKill.attack());
-
+            monsterToKill.decreaseHp(player.attack());
+            System.out.println("You hit the " + monsterToKill.getClass().getSimpleName() + " for " + player.getAp() + " dmg!");
             if (!monsterToKill.isAlive()) {
-                System.out.println("You slayed the monster");
+                System.out.println("You slayed the " + monsterToKill.getClass().getSimpleName() + "!");
                 map.removeMonster(monsterToKill);
-                combatantsAlive = false;
-            } else if(!player.isAlive()){
-                System.out.println("Oh dear, you are dead!");
-                combatantsAlive = false;
+            }else{
+                getMonsterHealthStatus(monsterToKill);
+                player.decreaseHp(monsterToKill.attack());
+                System.out.println("The " + monsterToKill.getClass().getSimpleName() + " hit you for " + monsterToKill.getAp() + " dmg!");
+                //evaluatePlayerLocation();
+                getPlayerHealthStatus();
+
             }
         }
     }
@@ -207,10 +212,10 @@ public class App {
         }
     }
 
-    //protected för test
-    protected void travelDirection(int newX, int newY) {
+
+    private void travelDirection(int newX, int newY) {
         if (newX > 9 || newX < 0 || newY > 9 || newY < 0) {
-            System.out.println("Invalid move");
+            System.out.println("Invalid move!!");
         } else {
             Location oldLocation = map.getActivePlayerLocation();
             oldLocation.setVisited(true);
