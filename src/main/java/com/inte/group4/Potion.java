@@ -41,6 +41,15 @@ public class Potion extends Item implements Comparable<Potion> {
         }
         return 0;
     }
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Potion){
+            Potion o = (Potion)other;
+            return currentHpIncrease == o.currentHpIncrease;
+        }
+        else
+            return false;
+    }
 
     @Override
     public String toString() {

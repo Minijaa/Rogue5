@@ -22,6 +22,15 @@ public class Bandage extends Item implements Comparable<Bandage> {
         }
         return type;
     }
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Bandage){
+            Bandage o = (Bandage)other;
+            return hpIncreaseValue == o.hpIncreaseValue;
+        }
+        else
+            return false;
+    }
 
     @Override
     public int compareTo(Bandage other) {

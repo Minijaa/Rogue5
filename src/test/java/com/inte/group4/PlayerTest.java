@@ -2,6 +2,8 @@ package com.inte.group4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -193,5 +195,38 @@ class PlayerTest {
 		newPlayer.useItem(newBandage);
 		assertEquals(hurtPlayerHp + newBandage.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
+
+	@Test
+	public void sortNormalInventoryTestCheckFirstItem(){
+        setUpNormalInventory();
+		newPlayer.sortInventory();
+		Potion expectedPotion = new Potion(200);
+		Potion actualPotion = (Potion)newPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion,actualPotion);
+	}
+	@Test
+	public void sortNormalInventoryTestCheckLastItem(){
+		setUpNormalInventory();
+		newPlayer.sortInventory();
+		Scroll expectedScroll = new Scroll(1,1);
+		Scroll actualScroll= (Scroll)newPlayer.getItemByIndex(4);
+		assertEquals(expectedScroll,actualScroll );
+	}
+
+	private void setUpNormalInventory(){
+		Scroll powerScroll = new Scroll(1,1);
+		newPlayer.addToInventory((powerScroll));
+		Scroll strengthScroll = new Scroll(1,0);
+		newPlayer.addToInventory((strengthScroll));
+		Bandage bOne = new Bandage();
+		newPlayer.addToInventory(bOne);
+		Potion massivePotion = new Potion(600);
+		newPlayer.addToInventory(massivePotion);
+		Potion minorPotion = new Potion(200);
+		newPlayer.addToInventory(minorPotion);
+
+	}
+
+
 
 }

@@ -1,6 +1,8 @@
 package com.inte.group4;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Player extends Sprite {
 
@@ -10,6 +12,10 @@ public class Player extends Sprite {
     public Player(int ap, int hp) {
         super(ap, hp);
         inventory = new ArrayList<Item>(MAX_INVENTORY);
+    }
+    Player(int ap, int hp,int inventroySize) {
+        super(ap, hp);
+        inventory = new ArrayList<Item>(inventroySize);
     }
 
     // Hur testa denna metod? Endast size, vi kan inte testa vad som skrivs ut?
@@ -44,7 +50,6 @@ public class Player extends Sprite {
             return removedItem;
         }
         return null;
-
     }
 
     public Item removeFromInventory(int indexToRemove) {
@@ -83,21 +88,44 @@ public class Player extends Sprite {
         }
     }
 
-    // Hur testa denna metod?
-    public int printInventory() {
-        if (inventory.isEmpty()) {
-            System.out.println("Your inventory is empty! :(");
-            return 0;
-        } else {
-            System.out.println("Inventory opened, pick an item!");
-            int number = 1;
-            for (Item item : inventory) {
-                System.out.println(number + ": " + item.toString());
-                number++;
-            }
-            return number;
-        }
+	public int printInventory() {
+		if (inventory.isEmpty()) {
+			System.out.println("Your inventory is empty! :(");
+			return 0;
+		} else {
+			System.out.println("Inventory opened, pick an item!");
+			int number = 1;
+			for (Item item : inventory) {
+				System.out.println(number + ": " + item.toString());
+				number++;
+			}
+			return number;
+		}
 
-    }
+	}
+	protected void sortInventory(){
+		ArrayList<Potion>potionList = new ArrayList<>();;
+		ArrayList<Bandage>bandageList= new ArrayList<>();
+		ArrayList<Scroll>scrollList=new ArrayList<>();
+		for (Item i:inventory) {
+			if(i instanceof Potion){
+				Potion p = (Potion)i;
+				potionList.add(p);
+			}else if(i instanceof Bandage){
+				Bandage b = (Bandage)i;
+				bandageList.add(b);
+			}else if(i instanceof Scroll){
+				Scroll s = (Scroll)i;
+				scrollList.add(s);
+			}
+		}
+		Collections.sort(potionList);
+		Collections.sort(bandageList);
+		Collections.sort(scrollList);
+		inventory.clear();
+		inventory.addAll(potionList);
+		inventory.addAll(bandageList);
+		inventory.addAll(scrollList);
+	}
 
 }

@@ -57,6 +57,18 @@ public class Scroll extends Item implements Comparable<Scroll> {
     public int getMaxHpBuff() {
         return maxHpBuff;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Scroll){
+            Scroll o = (Scroll)other;
+            return maxApBuff == o.maxApBuff && maxHpBuff==o.maxHpBuff;
+        }
+        else
+            return false;
+    }
+
+
 }
 //  Gamla compareTo-koden. Den funkar men va lite svårtestad eftersom den inte jämför med other)
 //        if (maxApBuff == 0 && maxHpBuff > 0) {
