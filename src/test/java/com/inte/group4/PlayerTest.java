@@ -20,16 +20,17 @@ class PlayerTest {
 
 	Item spawnItem() {
 		Random rnd = new Random();
-		int ap = rnd.nextInt(10);
-		int hp = rnd.nextInt(500);
-		int itemType = rnd.nextInt(2);
+		boolean apForScroll = rnd.nextBoolean();
+		boolean hpForScroll = rnd.nextBoolean();
+		int hpForPotion = rnd.nextInt(500);
+		int itemType = rnd.nextInt(3);
 		Item newItem;
 		switch (itemType) {
 		case 0:
-			newItem = new Potion(hp);
+			newItem = new Potion(hpForPotion);
 			break;
 		case 1:
-			newItem = new Scroll(ap, hp);
+			newItem = new Scroll(apForScroll, hpForScroll);
 			break;
 		case 2:
 			newItem = new Bandage();
@@ -180,7 +181,7 @@ class PlayerTest {
 
 	@Test
 	public void useScrollOfPowerTest() {
-		Scroll powerScroll = new Scroll(1, 1);
+		Scroll powerScroll = new Scroll(true, true);
 		int oldMaxHp = newPlayer.getMaxHp();
 		int oldAp = newPlayer.getAp();
 		newPlayer.useItem(powerScroll);
@@ -197,26 +198,27 @@ class PlayerTest {
 	}
 
 	@Test
-	public void sortNormalInventoryTestCheckFirstItem(){
-        setUpNormalInventory();
-		newPlayer.sortInventory();
-		Potion expectedPotion = new Potion(200);
-		Potion actualPotion = (Potion)newPlayer.getItemByIndex(0);
-		assertEquals(expectedPotion,actualPotion);
-	}
-	@Test
-	public void sortNormalInventoryTestCheckLastItem(){
+	public void sortNormalInventoryTestCheckFirstItem() {
 		setUpNormalInventory();
 		newPlayer.sortInventory();
-		Scroll expectedScroll = new Scroll(1,1);
-		Scroll actualScroll= (Scroll)newPlayer.getItemByIndex(4);
-		assertEquals(expectedScroll,actualScroll );
+		Potion expectedPotion = new Potion(200);
+		Potion actualPotion = (Potion) newPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion, actualPotion);
 	}
 
-	private void setUpNormalInventory(){
-		Scroll powerScroll = new Scroll(1,1);
+	@Test
+	public void sortNormalInventoryTestCheckLastItem() {
+		setUpNormalInventory();
+		newPlayer.sortInventory();
+		Scroll expectedScroll = new Scroll(true, true);
+		Scroll actualScroll = (Scroll) newPlayer.getItemByIndex(4);
+		assertEquals(expectedScroll, actualScroll);
+	}
+
+	private void setUpNormalInventory() {
+		Scroll powerScroll = new Scroll(true, true);
 		newPlayer.addToInventory((powerScroll));
-		Scroll strengthScroll = new Scroll(1,0);
+		Scroll strengthScroll = new Scroll(true, false);
 		newPlayer.addToInventory((strengthScroll));
 		Bandage bOne = new Bandage();
 		newPlayer.addToInventory(bOne);
@@ -226,7 +228,5 @@ class PlayerTest {
 		newPlayer.addToInventory(minorPotion);
 
 	}
-
-
 
 }
