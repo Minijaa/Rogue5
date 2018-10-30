@@ -25,7 +25,6 @@ public class Dragon extends Monster {
 			int newY = currentPoint.y - 1;
 			newPoint = new Point(newX, newY);
 		}
-		// System.out.print(newPoint);
 		return newPoint;
 	}
 
