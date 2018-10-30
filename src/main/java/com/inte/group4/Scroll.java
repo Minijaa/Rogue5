@@ -61,8 +61,9 @@ public class Scroll extends Item implements Comparable<Scroll> {
 		if (other instanceof Scroll) {
 			Scroll o = (Scroll) other;
 			return maxApBuff == o.maxApBuff && maxHpBuff == o.maxHpBuff;
-		} else
+		} else {
 			return false;
+		}
 	}
 
 	@Override
@@ -70,7 +71,6 @@ public class Scroll extends Item implements Comparable<Scroll> {
 		assert false : "hashCode not designed";
 		return 42;
 	}
-
 
 }
 //  Gamla compareTo-koden. Den funkar men va lite svårtestad eftersom den inte jämför med other)

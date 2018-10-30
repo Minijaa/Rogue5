@@ -148,24 +148,6 @@ public class Map {
 		return cords;
 	}
 
-	//
-	// if (monsterList.size() < 15) {
-	//
-	// Point cords = new Point(rndCords());
-	// Location location = getLocationFromPoint(cords);
-	// if (location.getMonster() == null) {
-	// monster.setCurrentMonsterCords(cords);
-//    public void addMonsterToGrid(Monster monster) {
-//                location.setMonster(monster);
-//                addMonsterToList(monster);
-//                //System.out.println(monsterList.size());
-//                System.out.println(monster.toString());
-//            }
-//        } else {
-//            throw new IllegalArgumentException("There can only be 15 monsters in a map");
-//        }
-//    }
-
 	public Monster getMonsterFromList(int index) {
 		return monsterList.get(index);
 	}
@@ -179,7 +161,7 @@ public class Map {
 			Point oldPoint = m.getCurrentMonsterCords();
 			// System.out.println("Monster Type:" + m.getClass().getSimpleName() + "
 			// OLDPOINT: " + oldPoint.x + " " + oldPoint.y);
-			Point newPoint = m.moveMonster();
+			Point newPoint = m.generatePointForMonsterMovement();
 			if (getLocationFromPoint(newPoint).getMonster() != null
 					|| getLocationFromPoint(newPoint).equals(activePlayerLocation)) {
 				if (m.getDeadLockCounter() == 3) {

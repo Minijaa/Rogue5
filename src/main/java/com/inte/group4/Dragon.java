@@ -12,7 +12,7 @@ public class Dragon extends Monster {
 	}
 
 	@Override
-	public Point moveMonster() {
+	public Point generatePointForMonsterMovement() {
 		Point currentPoint = this.getCurrentMonsterCords();
 		checkForBoundaries(currentPoint);
 		Point newPoint;

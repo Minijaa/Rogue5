@@ -13,7 +13,7 @@ public class Ogre extends Monster {
 	}
 
 	@Override
-	public Point moveMonster() {
+	public Point generatePointForMonsterMovement() {
 		Point ogrePoint = getCurrentMonsterCords();
 		checkForBoundaries(ogrePoint);
 

@@ -43,7 +43,7 @@ abstract public class Sprite {
 
     @Override
     public String toString() {
-        String str = "Ap:" + ap + " HP:" + currentHp;
+        String str = "AP:" + ap + " HP:" + currentHp;
         return str;
     }
 

@@ -21,7 +21,7 @@ abstract public class Monster extends Sprite {
         currentMonsterCords = p;
     }
 
-    abstract public Point moveMonster();
+    abstract public Point generatePointForMonsterMovement();
     
     abstract protected void checkForBoundaries(Point currentPoint);
 

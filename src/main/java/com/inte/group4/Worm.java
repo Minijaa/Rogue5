@@ -12,7 +12,7 @@ public class Worm extends Monster {
 	}
 
 	@Override
-	public Point moveMonster() {
+	public Point generatePointForMonsterMovement() {
 		Point oldPosition = currentMonsterCords;
 		Point newPosition;
 		checkForBoundaries(oldPosition);

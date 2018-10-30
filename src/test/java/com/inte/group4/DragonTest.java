@@ -25,7 +25,7 @@ class DragonTest {
 
     @Test
     public void testReturnNewPoint() {
-        Point newPoint = testDragon.moveMonster();
+        Point newPoint = testDragon.generatePointForMonsterMovement();
         Point expectedPoint = new Point(1, 4);
         assertEquals(expectedPoint, newPoint);
     }
@@ -34,7 +34,7 @@ class DragonTest {
     public void testRunInToTopLeft() {
         Dragon testTopLeftDragon = new Dragon(new Point(0, 7));
         testTopLeftDragon.setUpOrLeft(true);
-        Point newDragonPoint = testTopLeftDragon.moveMonster();
+        Point newDragonPoint = testTopLeftDragon.generatePointForMonsterMovement();
         Point expectedPoint = new Point(1, 6);
         assertEquals(expectedPoint, newDragonPoint);
     }
@@ -43,7 +43,7 @@ class DragonTest {
     public void testRunInToBottomR() {
         Dragon testBottomRightDragon = new Dragon(new Point(8, 0));
         testBottomRightDragon.setUpOrLeft(false);
-        Point newDragonPoint = testBottomRightDragon.moveMonster();
+        Point newDragonPoint = testBottomRightDragon.generatePointForMonsterMovement();
         Point expectedPoint = new Point(7, 1);
         assertEquals(expectedPoint, newDragonPoint);
     }
@@ -53,10 +53,17 @@ class DragonTest {
         Dragon extendedMovementdragon = new Dragon(new Point(9, 0));
         extendedMovementdragon.setUpOrLeft(true);
         for (int i = 0; i < 20; i++) {
-            extendedMovementdragon.setCurrentMonsterCords(extendedMovementdragon.moveMonster());
+            extendedMovementdragon.setCurrentMonsterCords(extendedMovementdragon.generatePointForMonsterMovement());
         }
         Point newDragonPoint = extendedMovementdragon.getCurrentMonsterCords();
         Point expectedPoint = new Point(7, 2);
         assertEquals(expectedPoint, newDragonPoint);
+    }
+    
+    @Test
+    public void toStringDragonTest() {
+    	Dragon testDragon = new Dragon(new Point(3,2));
+    	String expectedtoString = "Dragon AP:300 HP:500 cords: 3:2";
+    	assertEquals(expectedtoString, testDragon.toString());
     }
 }
