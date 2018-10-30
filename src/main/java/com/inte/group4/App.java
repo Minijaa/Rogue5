@@ -170,7 +170,7 @@ public class App {
 		Item treasure = activeLocation.getTreasure();
 
 		if (treasure != null) {
-			if (player.getInventorySize() == Player.getMaxInventory()) {
+			if (player.getInventorySize() == player.getMaxInventory()) {
 				System.out.println("Inventory FULL, use an item to pick up treasure!");
 			} else {
 				player.addToInventory(treasure);

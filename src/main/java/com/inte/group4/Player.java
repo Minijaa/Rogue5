@@ -6,16 +6,22 @@ import java.util.Collections;
 public class Player extends Sprite {
 
 	private ArrayList<Item> inventory;
-	private final static int MAX_INVENTORY = 5;
+	//private final static int MAX_INVENTORY = 5;
+	private int maxInventory=5;
+
 
 	public Player(int ap, int hp) {
 		super(ap, hp);
-		inventory = new ArrayList<Item>(MAX_INVENTORY);
+		maxInventory =5 ;
+		inventory = new ArrayList<Item>(maxInventory );
+
 	}
 
-	Player(int ap, int hp, int inventroySize) {
+	Player(int ap, int hp, int inventorySize) {
 		super(ap, hp);
-		inventory = new ArrayList<Item>(inventroySize);
+		maxInventory =inventorySize ;
+		inventory = new ArrayList<Item>(inventorySize);
+
 	}
 
 	// Hur testa denna metod? Endast size, vi kan inte testa vad som skrivs ut?
@@ -26,14 +32,14 @@ public class Player extends Sprite {
 		return inventory.size();
 	}
 
-	public static int getMaxInventory() {
-		return MAX_INVENTORY;
+	public int getMaxInventory() {
+		return maxInventory ;
 	}
 
 	public String addToInventory(Item newItem) {
 		String returnValue = null;
 		if (newItem != null) {
-			if (inventory.size() < MAX_INVENTORY) {
+			if (inventory.size() < maxInventory) {
 				inventory.add(newItem);
 				returnValue = "You found " + newItem.toString();
 			} else {
@@ -140,6 +146,18 @@ public class Player extends Sprite {
 		inventory.addAll(potionList);
 		inventory.addAll(bandageList);
 		inventory.addAll(scrollList);
+	}
+	public void bubbleSortPotionInventory() {
+		for(int i=1; i<=inventory.size()-1; i++){
+			for(int j=1; j<=inventory.size()-i; j++){
+				Potion firstPotion =  (Potion) inventory.get(j-1);
+				Potion secondPotion = (Potion) inventory.get(j);
+				if(firstPotion.getHpIncreaseValue()>secondPotion.getHpIncreaseValue()){
+					inventory.set(j-1,secondPotion);
+					inventory.set(j,firstPotion);
+				}
+			}
+		}
 	}
 
 }

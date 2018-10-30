@@ -2,6 +2,7 @@ package com.inte.group4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.Test;
 class PlayerTest {
 
 	Player newPlayer;
+	Player largeInventroyPlayer;
+	ArrayList<Potion>largeInvetory= new ArrayList<>();
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -79,7 +82,7 @@ class PlayerTest {
 
 	@Test
 	public void fillPlayerInventoryTest() {
-		while (newPlayer.getInventorySize() < Player.getMaxInventory()) {
+		while (newPlayer.getInventorySize() < newPlayer.getMaxInventory()) {
 			Item newItem = spawnItem();
 			newPlayer.addToInventory(newItem);
 		}
@@ -226,6 +229,42 @@ class PlayerTest {
 		newPlayer.addToInventory(massivePotion);
 		Potion minorPotion = new Potion(200);
 		newPlayer.addToInventory(minorPotion);
+	}
+
+	@Test
+	public void sortLargeInventoryTestCheckFirstItem(){
+        largeInventroyPlayer = new Player(10,1000,10000);
+		setupLargeUnsortedInventoryOfPotions();
+		largeInventroyPlayer.sortInventory();
+		Potion expectedPotion = new Potion(200);
+		Potion actualPotion= (Potion)largeInventroyPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion,actualPotion );
+	}
+	@Test
+	public void bubbleSortLargeInventoryTestCheckFirstItem(){
+		largeInventroyPlayer = new Player(10,1000,10000);
+		setupLargeUnsortedInventoryOfPotions();
+		largeInventroyPlayer.bubbleSortPotionInventory();
+		Potion expectedPotion = new Potion(200);
+		Potion actualPotion= (Potion)largeInventroyPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion,actualPotion );
+	}
+
+	private void setupLargeUnsortedInventoryOfPotions(){
+		Potion p;
+		for(int i=0; i<10000; i++){
+			if(i<3000){
+				p= new Potion(1000000);
+				largeInventroyPlayer.addToInventory(p);
+			}
+			else if(i>=3000&&i<6000){
+				p= new Potion(500);
+				largeInventroyPlayer.addToInventory(p);
+			}else {
+				p= new Potion(200);
+				largeInventroyPlayer.addToInventory(p);
+			}
+		}
 
 	}
 
