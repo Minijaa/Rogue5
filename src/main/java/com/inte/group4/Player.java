@@ -6,20 +6,19 @@ import java.util.Collections;
 public class Player extends Sprite {
 
 	private ArrayList<Item> inventory;
-	//private final static int MAX_INVENTORY = 5;
+	// private final static int MAX_INVENTORY = 5;
 	private int maxInventory;
-
 
 	public Player(int ap, int hp) {
 		super(ap, hp);
-		maxInventory =5 ;
-		inventory = new ArrayList<Item>(maxInventory );
+		maxInventory = 5;
+		inventory = new ArrayList<Item>(maxInventory);
 
 	}
 
 	Player(int ap, int hp, int inventorySize) {
 		super(ap, hp);
-		maxInventory =inventorySize ;
+		maxInventory = inventorySize;
 		inventory = new ArrayList<Item>(inventorySize);
 
 	}
@@ -29,7 +28,7 @@ public class Player extends Sprite {
 	}
 
 	public int getMaxInventory() {
-		return maxInventory ;
+		return maxInventory;
 	}
 
 	public String addToInventory(Item newItem) {
@@ -143,14 +142,15 @@ public class Player extends Sprite {
 		inventory.addAll(bandageList);
 		inventory.addAll(scrollList);
 	}
+
 	public void bubbleSortPotionInventory() {
-		for(int i=1; i<=inventory.size()-1; i++){
-			for(int j=1; j<=inventory.size()-i; j++){
-				Potion firstPotion =  (Potion) inventory.get(j-1);
+		for (int i = 1; i <= inventory.size() - 1; i++) {
+			for (int j = 1; j <= inventory.size() - i; j++) {
+				Potion firstPotion = (Potion) inventory.get(j - 1);
 				Potion secondPotion = (Potion) inventory.get(j);
-				if(firstPotion.getHpIncreaseValue()>secondPotion.getHpIncreaseValue()){
-					inventory.set(j-1,secondPotion);
-					inventory.set(j,firstPotion);
+				if (firstPotion.getHpIncreaseValue() > secondPotion.getHpIncreaseValue()) {
+					inventory.set(j - 1, secondPotion);
+					inventory.set(j, firstPotion);
 				}
 			}
 		}

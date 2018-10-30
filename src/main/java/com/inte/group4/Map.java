@@ -47,7 +47,7 @@ public class Map {
 			for (int x = 0; x < mapGrid.length; x++) {
 				if (mapGrid[x][y].getMonster() != null) {
 					mapGrid[x][y].setMapChar();
-					monsterList.add(mapGrid[x][y].getMonster());
+					addMonsterToList(mapGrid[x][y].getMonster());
 				}
 			}
 		}
@@ -125,11 +125,12 @@ public class Map {
 		monsterList.add(monster);
 	}
 
-	public void removeMonster(Monster monsterToBeRemoved) {
+	public Monster removeMonster(Monster monsterToBeRemoved) {
 		Location location = this.getLocationFromPoint(monsterToBeRemoved.getCurrentMonsterCords());
 		location.setMonster(null);
 		removeMonsterFromList(monsterToBeRemoved);
 		location.setLocationText("silence");
+		return monsterToBeRemoved;
 	}
 
 	public void removeMonsterFromList(Monster monster) {

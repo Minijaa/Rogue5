@@ -73,7 +73,7 @@ class PlayerTest {
 		Item itemToBeAdded = spawnItem();
 		String acceptedAddString = newPlayer.addToInventory(itemToBeAdded);
 		assertEquals(1, newPlayer.getInventorySize());
-		assertEquals("You found "  + itemToBeAdded.toString(), acceptedAddString);
+		assertEquals("You found " + itemToBeAdded.toString(), acceptedAddString);
 	}
 
 	@Test
@@ -161,7 +161,32 @@ class PlayerTest {
 	}
 
 	@Test
-	public void useMinorPotionTest() {
+	void printInventoryThatIsEmptyTest() {
+		int inventoryResult = newPlayer.printInventory();
+		assertEquals(0, inventoryResult);
+	}
+
+	@Test
+	void printInventoryWithOneItemTest() {
+		Item newItem = spawnItem();
+		newPlayer.addToInventory(newItem);
+		int inventoryResult = newPlayer.printInventory();
+		assertEquals(2, inventoryResult);
+	}
+	
+	@Test
+	void printInventoryWithManyItemsTest() {
+		Player playerWithBigInventory = new Player(100,1000, 50);
+		for(int i = 0; i < 50; i++) {
+			Item newItem = spawnItem();
+			playerWithBigInventory.addToInventory(newItem);
+		}
+		int inventoryResult = playerWithBigInventory.printInventory();
+		assertEquals(51, inventoryResult);
+	}
+
+	@Test
+	void useMinorPotionTest() {
 		Potion minorPotion = new Potion(200);
 		newPlayer.decreaseHp(300);
 		int hurtPlayerHp = newPlayer.getCurrentHp();
@@ -170,7 +195,7 @@ class PlayerTest {
 	}
 
 	@Test
-	public void useUltimatePotionTest() {
+	void useUltimatePotionTest() {
 		Potion ultimatePotion = new Potion(501);
 		newPlayer.decreaseHp(900);
 		newPlayer.useItem(ultimatePotion);
@@ -178,7 +203,7 @@ class PlayerTest {
 	}
 
 	@Test
-	public void useScrollOfPowerTest() {
+	void useScrollOfPowerTest() {
 		Scroll powerScroll = new Scroll(true, true);
 		int oldMaxHp = newPlayer.getMaxHp();
 		int oldAp = newPlayer.getAp();
@@ -187,7 +212,8 @@ class PlayerTest {
 		assertEquals(oldAp + powerScroll.getMaxApBuff(), newPlayer.getAp());
 	}
 
-	public void useBandageTest() {
+	@Test
+	void useBandageTest() {
 		Bandage newBandage = new Bandage();
 		newPlayer.decreaseHp(500);
 		int hurtPlayerHp = newPlayer.getCurrentHp();
@@ -196,7 +222,7 @@ class PlayerTest {
 	}
 
 	@Test
-	public void sortNormalInventoryTestCheckFirstItem() {
+	void sortNormalInventoryTestCheckFirstItem() {
 		setUpNormalInventory();
 		newPlayer.sortInventory();
 		Potion expectedPotion = new Potion(200);
@@ -205,7 +231,7 @@ class PlayerTest {
 	}
 
 	@Test
-	public void sortNormalInventoryTestCheckLastItem() {
+	void sortNormalInventoryTestCheckLastItem() {
 		setUpNormalInventory();
 		newPlayer.sortInventory();
 		Scroll expectedScroll = new Scroll(true, true);
@@ -227,36 +253,36 @@ class PlayerTest {
 	}
 
 	@Test
-	public void sortLargeInventoryTestCheckFirstItem(){
-        largeInventroyPlayer = new Player(10,1000,10000);
+	void sortLargeInventoryTestCheckFirstItem() {
+		largeInventroyPlayer = new Player(10, 1000, 10000);
 		setupLargeUnsortedInventoryOfPotions();
 		largeInventroyPlayer.sortInventory();
 		Potion expectedPotion = new Potion(200);
-		Potion actualPotion= (Potion)largeInventroyPlayer.getItemByIndex(0);
-		assertEquals(expectedPotion,actualPotion );
+		Potion actualPotion = (Potion) largeInventroyPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion, actualPotion);
 	}
+
 	@Test
-	public void bubbleSortLargeInventoryTestCheckFirstItem(){
-		largeInventroyPlayer = new Player(10,1000,10000);
+	void bubbleSortLargeInventoryTestCheckFirstItem() {
+		largeInventroyPlayer = new Player(10, 1000, 10000);
 		setupLargeUnsortedInventoryOfPotions();
 		largeInventroyPlayer.bubbleSortPotionInventory();
 		Potion expectedPotion = new Potion(200);
-		Potion actualPotion= (Potion)largeInventroyPlayer.getItemByIndex(0);
-		assertEquals(expectedPotion,actualPotion );
+		Potion actualPotion = (Potion) largeInventroyPlayer.getItemByIndex(0);
+		assertEquals(expectedPotion, actualPotion);
 	}
 
-	private void setupLargeUnsortedInventoryOfPotions(){
+	private void setupLargeUnsortedInventoryOfPotions() {
 		Potion p;
-		for(int i=0; i<10000; i++){
-			if(i<3000){
-				p= new Potion(1000000);
+		for (int i = 0; i < 10000; i++) {
+			if (i < 3000) {
+				p = new Potion(1000000);
 				largeInventroyPlayer.addToInventory(p);
-			}
-			else if(i<6000){
-				p= new Potion(500);
+			} else if (i < 6000) {
+				p = new Potion(500);
 				largeInventroyPlayer.addToInventory(p);
-			}else {
-				p= new Potion(200);
+			} else {
+				p = new Potion(200);
 				largeInventroyPlayer.addToInventory(p);
 			}
 		}
