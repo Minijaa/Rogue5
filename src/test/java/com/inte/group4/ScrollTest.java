@@ -38,4 +38,25 @@ class ScrollTest {
 		assertEquals("Scroll of Strength: +300 AP", testStrengthScroll.toString());
 		assertEquals("Scroll of Power: +200 AP / +400 Max HP", testPowerScroll.toString());
 	}
+
+	@Test
+	void equalsScrollCorrectTest() {
+		Scroll s1 = new Scroll(false, false);
+		Scroll s2 = s1;
+		assertEquals(s1, s2);
+	}
+
+	@Test
+	void equalsScrollNotCorrectTest() {
+		Scroll s1 = new Scroll(false, false);
+		Scroll s2 = new Scroll(true, false);
+		assertNotEquals(s1, s2);
+	}
+
+	@Test
+	void equalsScrollAndBandageTest() {
+		Scroll testScroll = new Scroll(true, true);
+		Bandage testBandage = new Bandage();
+		assertNotEquals(testScroll, testBandage);
+	}
 }

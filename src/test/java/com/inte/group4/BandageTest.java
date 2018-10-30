@@ -57,4 +57,25 @@ class BandageTest {
 		assertEquals("Cleanish Bandage: +" + cleanishBandage.getHpIncreaseValue() + " HP", cleanishBandage.toString());
 		assertEquals("Sterile Bandage: +" + sterileBandage.getHpIncreaseValue() + " HP", sterileBandage.toString());
 	}
+	
+	@Test
+	void equalsBandageCorrectTest() {
+		Bandage b1 = new Bandage();
+		Bandage b2 = b1;
+		assertEquals(b1, b2);
+	}
+	
+	@Test
+	void equalsBandageNotCorrectTest() {
+		Bandage b1 = new Bandage();
+		Bandage b2 = new Bandage();
+		assertNotEquals(b1, b2);
+	}
+	
+	@Test
+	void equalsBandageAndPotionTest() {
+		Bandage testBandage = new Bandage();
+		Potion testPotion = new Potion(200);
+		assertNotEquals(testBandage, testPotion);
+	}
 }

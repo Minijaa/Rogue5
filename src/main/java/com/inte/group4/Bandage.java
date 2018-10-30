@@ -33,11 +33,11 @@ public class Bandage extends Item implements Comparable<Bandage> {
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		assert false : "hashCode not designed";
-		return 42;
-	}
+//	@Override
+//	public int hashCode() {
+//		assert false : "hashCode not designed";
+//		return 42;
+//	}
 
 	@Override
 	public int compareTo(Bandage other) {

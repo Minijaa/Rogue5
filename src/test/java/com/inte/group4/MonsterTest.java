@@ -1,6 +1,5 @@
 package com.inte.group4;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +8,7 @@ import java.awt.Point;
 class MonsterTest {
 
 	@Test
-	public void isUpOrLeftChangeTest() {
+	void isUpOrLeftChangeTest() {
 		Ogre testOgre = new Ogre(new Point(6, 7));
 		testOgre.setUpOrLeft(true);
 		assertTrue(testOgre.getIsUpOrLeft());
@@ -19,12 +18,22 @@ class MonsterTest {
 	}
 
 	@Test
-	public void addToDeadLockTest() {
-		Dragon testDragon = new Dragon(new Point(3,6));
+	void addToDeadLockTest() {
+		Dragon testDragon = new Dragon(new Point(3, 6));
+		testDragon.incrementDeadLockCounter();
+		assertEquals(1, testDragon.getDeadLockCounter());
+
 	}
 
-	public void resetDeadLockTest() {
-		// reset'a osv
+	@Test
+	void resetDeadLockTest() {
+		Worm testWorm = new Worm(new Point(3, 6));
+		testWorm.incrementDeadLockCounter();
+		testWorm.incrementDeadLockCounter();
+		testWorm.incrementDeadLockCounter();
+		testWorm.resetDeadLockCounter();
+		assertEquals(0, testWorm.getDeadLockCounter());
+
 	}
 
 }
