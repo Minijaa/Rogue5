@@ -9,7 +9,7 @@ import java.awt.Point;
 class MonsterTest {
 
 	@Test
-	public void isUpOrLeftChangeTest() {
+	void isUpOrLeftChangeTest() {
 		Ogre testOgre = new Ogre(new Point(6, 7));
 		testOgre.setUpOrLeft(true);
 		assertTrue(testOgre.getIsUpOrLeft());
@@ -19,11 +19,11 @@ class MonsterTest {
 	}
 
 	@Test
-	public void addToDeadLockTest() {
+	void addToDeadLockTest() {
 		Dragon testDragon = new Dragon(new Point(3,6));
 	}
 
-	public void resetDeadLockTest() {
+	void resetDeadLockTest() {
 		// reset'a osv
 	}
 
