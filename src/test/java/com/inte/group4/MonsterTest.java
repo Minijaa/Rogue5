@@ -14,7 +14,6 @@ class MonsterTest {
 		assertTrue(testOgre.getIsUpOrLeft());
 		testOgre.setUpOrLeft(false);
 		assertFalse(testOgre.getIsUpOrLeft());
-
 	}
 
 	@Test
@@ -22,7 +21,6 @@ class MonsterTest {
 		Dragon testDragon = new Dragon(new Point(3, 6));
 		testDragon.incrementDeadLockCounter();
 		assertEquals(1, testDragon.getDeadLockCounter());
-
 	}
 
 	@Test
@@ -33,7 +31,6 @@ class MonsterTest {
 		testWorm.incrementDeadLockCounter();
 		testWorm.resetDeadLockCounter();
 		assertEquals(0, testWorm.getDeadLockCounter());
-
 	}
 
 }

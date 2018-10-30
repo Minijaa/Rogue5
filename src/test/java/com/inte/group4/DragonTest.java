@@ -17,21 +17,21 @@ class DragonTest {
     }
 
     @Test
-    public void testCorrectDragonCords() {
+    void testCorrectDragonCords() {
         Point dragonPoint = testDragon.getCurrentMonsterCords();
         Point expectedPoint = new Point(2, 3);
         assertEquals(expectedPoint, dragonPoint);
     }
 
     @Test
-    public void testReturnNewPoint() {
+    void testReturnNewPoint() {
         Point newPoint = testDragon.generatePointForMonsterMovement();
         Point expectedPoint = new Point(1, 4);
         assertEquals(expectedPoint, newPoint);
     }
 
     @Test
-    public void testRunInToTopLeft() {
+    void testRunInToTopLeft() {
         Dragon testTopLeftDragon = new Dragon(new Point(0, 7));
         testTopLeftDragon.setUpOrLeft(true);
         Point newDragonPoint = testTopLeftDragon.generatePointForMonsterMovement();
@@ -40,7 +40,7 @@ class DragonTest {
     }
 
     @Test
-    public void testRunInToBottomR() {
+    void testRunInToBottomR() {
         Dragon testBottomRightDragon = new Dragon(new Point(8, 0));
         testBottomRightDragon.setUpOrLeft(false);
         Point newDragonPoint = testBottomRightDragon.generatePointForMonsterMovement();
@@ -49,19 +49,19 @@ class DragonTest {
     }
 
     @Test
-    public void testExtendedMovement() {
-        Dragon extendedMovementdragon = new Dragon(new Point(9, 0));
-        extendedMovementdragon.setUpOrLeft(true);
+    void testExtendedMovement() {
+        Dragon extendedMovementDragon = new Dragon(new Point(9, 0));
+        extendedMovementDragon.setUpOrLeft(true);
         for (int i = 0; i < 20; i++) {
-            extendedMovementdragon.setCurrentMonsterCords(extendedMovementdragon.generatePointForMonsterMovement());
+            extendedMovementDragon.setCurrentMonsterCords(extendedMovementDragon.generatePointForMonsterMovement());
         }
-        Point newDragonPoint = extendedMovementdragon.getCurrentMonsterCords();
+        Point newDragonPoint = extendedMovementDragon.getCurrentMonsterCords();
         Point expectedPoint = new Point(7, 2);
         assertEquals(expectedPoint, newDragonPoint);
     }
     
     @Test
-    public void toStringDragonTest() {
+    void toStringDragonTest() {
     	Dragon testDragon = new Dragon(new Point(3,2));
     	String expectedtoString = "Dragon AP:300 HP:500 cords: 3:2";
     	assertEquals(expectedtoString, testDragon.toString());

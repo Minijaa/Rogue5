@@ -43,7 +43,7 @@ class WormTest {
 	}
 
 	@Test
-	public void toStringWormTest() {
+	void toStringWormTest() {
 		Worm testWorm = new Worm(new Point(3, 2));
 		String expectedtoString = "Worm AP:400 HP:200 cords: 3:2";
 		assertEquals(expectedtoString, testWorm.toString());
