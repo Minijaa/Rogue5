@@ -17,13 +17,14 @@ class WormTest {
 
     @Test
     void moveMonsterTest() {
-        Point oldPosition = testWorm.getCurrentMonsterCords();
         testWorm.setUpOrLeft(true); //Tell worm to travel upwards
         Point newPosition = testWorm.moveMonster();
-        assertTrue(newPosition.x == oldPosition.x && newPosition.y == (oldPosition.y + 1));
+        Point expectedPoint = new Point(1, 2);
+        assertEquals(newPosition, expectedPoint);
         testWorm.setUpOrLeft(false); //Tell worm to travel downwards
         newPosition = testWorm.moveMonster();
-        assertTrue(newPosition.equals(oldPosition));
+        expectedPoint.y = 0;
+        assertEquals(newPosition, expectedPoint);
     }
 
     @Test
