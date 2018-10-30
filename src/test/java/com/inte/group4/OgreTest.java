@@ -18,19 +18,20 @@ class OgreTest {
     public void moveOgreMonsterTestLeft(){
         newOgre = new Ogre(new Point(4,4));
         for(int i=0;i<6;i++){
-            newOgre.moveMonster();
+            newOgre.setCurrentMonsterCords(newOgre.moveMonster());
         }
         Point newOgrePoint = newOgre.getCurrentMonsterCords();
         Point expected = new Point(2,4);
         assertEquals(expected,newOgrePoint);
     }
+    
     @Test
     public void moveOgreMonsterTestRight(){
         newOgre  = new Ogre(new Point(0,4));
         for(int i=0;i<12;i++){
-            newOgre .moveMonster();
+            newOgre.setCurrentMonsterCords(newOgre.moveMonster());
         }
-        Point newOgrePoint = newOgre .getCurrentMonsterCords();
+        Point newOgrePoint = newOgre.getCurrentMonsterCords();
         Point expected = new Point(6,4);
         assertEquals(expected,newOgrePoint);
     }

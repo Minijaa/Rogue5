@@ -4,54 +4,43 @@ import java.awt.*;
 import java.util.Random;
 
 public class Ogre extends Monster {
-    private int mockAttackPoints;
-    private static final int OGREHP= 300;
-    private static final int OGREAP= 100;
-    private boolean direction;
+	private int mockAttackPoints;
+	private static final int OGREHP = 300;
+	private static final int OGREAP = 100;
 
+	public Ogre(Point p) {
+		super(OGREAP, OGREHP, p);
+		monsterChar = 'G';
+	}
 
+	public void mockAttack(int attack) {
+		mockAttackPoints = attack;
+	}
 
-    public Ogre(Point p){
-        super(OGREAP,OGREHP, p);
-        monsterChar = 'G';
-    }
+	@Override
+	public Point moveMonster() {
+		Point ogrePoint = getCurrentMonsterCords();
+		checkForBoundaries(ogrePoint);
 
-    public void mockAttack(int attack){
-        mockAttackPoints = attack;
-    }
+		Point newOgrePoint;
+		if (getIsUpOrLeft()) {
+			newOgrePoint = new Point(ogrePoint.x + 1, ogrePoint.y);
+		} else {
+			newOgrePoint = new Point(ogrePoint.x - 1, ogrePoint.y);
+		}
+		return newOgrePoint;
+	}
 
+	protected void checkForBoundaries(Point currentPoint) {
+		if (currentPoint.x == 0) {
+			setUpOrLeft(true);
+		} else if (currentPoint.x == 9) {
+			setUpOrLeft(false);
+		}
+	}
 
-    private Point setDirection(int x, int y){
-        Point newDirection;
-        if (!(direction)){
-            newDirection = new Point(x-1,y);
-        }else{
-            newDirection = new Point(x+1,y);
-        }
-        return newDirection;
-    }
-
-    @Override
-    public Point moveMonster() {
-      Point ogrePoint = getCurrentMonsterCords();
-       int x = (int)ogrePoint.getX();
-       int y = (int)ogrePoint.getY();
-       checkforWall();
-       Point newOgrePoint= setDirection(x,y);
-       setCurrentMonsterCords(newOgrePoint);
-        return  newOgrePoint;
-   }
-   private void checkforWall() {
-       int x = (int)getCurrentMonsterCords().getX();
-        if(x==0){
-            direction=true;
-        }else if(x==9){
-            direction=false;
-        }
-   }
-
-    public String toString() {
-        String str = "Ogre " + super.toString();
-        return str;
-    }
+	public String toString() {
+		String str = "Ogre " + super.toString();
+		return str;
+	}
 }
