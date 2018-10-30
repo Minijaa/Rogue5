@@ -26,13 +26,13 @@ class OgreTest {
 	}
 
 	@Test
-	public void moveOgreMonsterTestRight() {
+	public void moveOgreMonsterTestLeftTurnRight() {
 		newOgre = new Ogre(new Point(0, 4));
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 20; i++) {
 			newOgre.setCurrentMonsterCords(newOgre.generatePointForMonsterMovement());
 		}
 		Point newOgrePoint = newOgre.getCurrentMonsterCords();
-		Point expected = new Point(6, 4);
+		Point expected = new Point(2, 4);
 		assertEquals(expected, newOgrePoint);
 	}
 
