@@ -11,7 +11,7 @@ class DragonTest {
     Dragon testDragon;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception{
         testDragon = new Dragon(new Point(2, 3));
         testDragon.setUpOrLeft(true);
     }

@@ -11,7 +11,7 @@ class WormTest {
     private Worm testWorm;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         testWorm = new Worm(new Point(1, 1));
     }
 

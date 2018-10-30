@@ -1,25 +1,22 @@
 package com.inte.group4;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
-    App newApp;
+    private App newTestApp;
 
     @BeforeEach
-    void setUp() {
-        newApp = new App();
+    void setUp() throws Exception {
+        newTestApp = new App();
     }
 
     @Test
     public void testNormalizeString() {
-        String actualOutput = newApp.normalizeString(" unNormalizedString");
+        String actualOutput = newTestApp.normalizeString(" unNormalizedString");
         String expectedOutput = "Unnormalizedstring";
 
         assertEquals(expectedOutput, actualOutput);

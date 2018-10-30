@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
     Map newMap = new Map();
-    Dragon dragon;
-    Ogre ogre;
-    Worm worm;
 
     @BeforeEach
 //    void setUp() {

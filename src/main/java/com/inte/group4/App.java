@@ -186,6 +186,7 @@ public class App {
                     break;
                 case "2":
                     System.out.println("Exiting game, well played or something ¯\\_(ツ)_/¯");
+                    running=false;
                     System.exit(0);
                     break;
                 default:

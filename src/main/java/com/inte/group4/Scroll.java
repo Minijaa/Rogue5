@@ -65,6 +65,13 @@ public class Scroll extends Item implements Comparable<Scroll> {
 			return false;
 	}
 
+	@Override
+	public int hashCode() {
+		assert false : "hashCode not designed";
+		return 42;
+	}
+
+
 }
 //  Gamla compareTo-koden. Den funkar men va lite svårtestad eftersom den inte jämför med other)
 //        if (maxApBuff == 0 && maxHpBuff > 0) {

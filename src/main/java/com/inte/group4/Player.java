@@ -24,11 +24,7 @@ public class Player extends Sprite {
 
 	}
 
-	// Hur testa denna metod? Endast size, vi kan inte testa vad som skrivs ut?
 	public int getInventorySize() {
-		int inventorySize = inventory.size();
-		// System.out.println("Inventory contains " + inventorySize + " items, out of "
-		// + MAX_INVENTORY);
 		return inventory.size();
 	}
 
