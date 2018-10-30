@@ -22,7 +22,7 @@ abstract public class Monster extends Sprite {
     }
 
     abstract public Point generatePointForMonsterMovement();
-    
+
     abstract protected void checkForBoundaries(Point currentPoint);
 
     public Point getCurrentMonsterCords() {
@@ -31,6 +31,9 @@ abstract public class Monster extends Sprite {
 
     public void setCurrentMonsterCords(Point currentMonsterCords) {
         this.currentMonsterCords = currentMonsterCords;
+        if (this instanceof Worm) {
+            ((Worm) this).grow();
+        }
     }
 
     @Override

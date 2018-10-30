@@ -53,6 +53,22 @@ class WormTest {
     }
 
     @Test
+    void testWormGrowth() {
+        Worm babyWorm = new Worm(new Point(0, 1));
+        Worm youngsterWorm = new Worm(new Point(5, 5));
+        Worm oldWorm = new Worm(new Point(4, 4));
+        for (int i = 0; i < 5; i++) {
+            youngsterWorm.setCurrentMonsterCords(youngsterWorm.generatePointForMonsterMovement());
+        }
+        for (int i = 0; i < 10; i++) {
+            oldWorm.setCurrentMonsterCords(youngsterWorm.generatePointForMonsterMovement());
+        }
+        assertEquals(400, babyWorm.getAp());
+        assertEquals(600, youngsterWorm.getAp());
+        assertEquals(800, oldWorm.getAp());
+    }
+
+    @Test
     void toStringWormTest() {
         Worm testWorm = new Worm(new Point(3, 2));
         String expectedtoString = "Worm AP:400 HP:200 cords: 3:2";
