@@ -14,7 +14,6 @@ class PlayerTest {
 
 	Player newPlayer;
 	Player largeInventroyPlayer;
-	ArrayList<Potion>largeInvetory= new ArrayList<>();
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -34,9 +33,6 @@ class PlayerTest {
 			break;
 		case 1:
 			newItem = new Scroll(apForScroll, hpForScroll);
-			break;
-		case 2:
-			newItem = new Bandage();
 			break;
 		default:
 			newItem = new Bandage();
@@ -177,7 +173,6 @@ class PlayerTest {
 	public void useUltimatePotionTest() {
 		Potion ultimatePotion = new Potion(501);
 		newPlayer.decreaseHp(900);
-		int hurtPlayerHp = newPlayer.getCurrentHp();
 		newPlayer.useItem(ultimatePotion);
 		assertEquals(newPlayer.getMaxHp(), newPlayer.getCurrentHp());
 	}
@@ -257,7 +252,7 @@ class PlayerTest {
 				p= new Potion(1000000);
 				largeInventroyPlayer.addToInventory(p);
 			}
-			else if(i>=3000&&i<6000){
+			else if(i<6000){
 				p= new Potion(500);
 				largeInventroyPlayer.addToInventory(p);
 			}else {

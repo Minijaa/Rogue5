@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
-    private App newTestApp;
+    App newTestApp;
 
     @BeforeEach
     void setUp() throws Exception {
