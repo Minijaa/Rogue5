@@ -46,22 +46,6 @@ class PlayerTest {
 		assertNotNull(newPlayer);
 	}
 
-	// Borde detta test vara i Sprite istället? Antagligen.
-	@Test
-	public void decreasePlayerHpTest() {
-		int attack = 100;
-		newPlayer.decreaseHp(attack);
-		assertEquals(900, newPlayer.getCurrentHp());
-	}
-
-	// Borde detta test vara i Sprite istället? Antagligen.
-	@Test
-	public void decreasePlayerHpToNegativeTest() {
-		int attack = 1000;
-		newPlayer.decreaseHp(attack);
-		assertFalse(newPlayer.isAlive());
-	}
-
 	@Test
 	public void addNullItemToPlayerInventoryTest() {
 		String nullItemString = newPlayer.addToInventory(null);
