@@ -8,7 +8,7 @@ public class Worm extends Monster {
 
 	public Worm(Point p) {
 		super(WORMAP, WORMHP, p);
-		monsterChar = 'W';
+		setMonsterChar('W');
 	}
 
 	@Override

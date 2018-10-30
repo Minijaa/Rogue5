@@ -8,7 +8,7 @@ public class Dragon extends Monster {
 
 	public Dragon(Point p) {
 		super(DRAGONAP, DRAGONHP, p);
-		monsterChar = '#';
+		setMonsterChar('#');
 	}
 
 	@Override

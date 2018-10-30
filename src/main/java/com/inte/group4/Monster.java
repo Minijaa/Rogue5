@@ -5,7 +5,7 @@ import java.awt.*;
 abstract public class Monster extends Sprite {
     private boolean isUpOrLeft;
     Point currentMonsterCords;
-    char monsterChar;
+    private char monsterChar;
     private int deadLockCounter;
 
     public boolean isUpOrLeft() {

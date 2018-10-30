@@ -9,7 +9,7 @@ public class Ogre extends Monster {
 
 	public Ogre(Point p) {
 		super(OGREAP, OGREHP, p);
-		monsterChar = 'G';
+		setMonsterChar('G');
 	}
 
 	@Override
