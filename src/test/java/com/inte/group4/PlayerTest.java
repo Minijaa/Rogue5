@@ -77,7 +77,7 @@ class PlayerTest {
 		Item itemToBeAdded = spawnItem();
 		String acceptedAddString = newPlayer.addToInventory(itemToBeAdded);
 		assertEquals(1, newPlayer.getInventorySize());
-		assertEquals("", acceptedAddString);
+		assertEquals("You found "  + itemToBeAdded.toString(), acceptedAddString);
 	}
 
 	@Test
@@ -179,7 +179,7 @@ class PlayerTest {
 		newPlayer.decreaseHp(900);
 		int hurtPlayerHp = newPlayer.getCurrentHp();
 		newPlayer.useItem(ultimatePotion);
-		assertEquals(hurtPlayerHp + ultimatePotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
+		assertEquals(newPlayer.getMaxHp(), newPlayer.getCurrentHp());
 	}
 
 	@Test

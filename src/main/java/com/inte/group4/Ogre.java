@@ -4,17 +4,12 @@ import java.awt.*;
 import java.util.Random;
 
 public class Ogre extends Monster {
-	private int mockAttackPoints;
 	private static final int OGREHP = 300;
 	private static final int OGREAP = 100;
 
 	public Ogre(Point p) {
 		super(OGREAP, OGREHP, p);
 		monsterChar = 'G';
-	}
-
-	public void mockAttack(int attack) {
-		mockAttackPoints = attack;
 	}
 
 	@Override

@@ -35,14 +35,4 @@ class OgreTest {
         Point expected = new Point(6,4);
         assertEquals(expected,newOgrePoint);
     }
-
-    @Test
-    public void testDecreaseOgreHp() {
-        newOgre = new Ogre(new Point(4,4));
-        newOgre.mockAttack( 100);
-        newOgre.decreaseHp(10);
-        int actual = newOgre.getCurrentHp();
-        assertEquals(90,actual);
-        }
-
 }

@@ -12,26 +12,25 @@ class LocationTest {
     Location testLocation;
 
 
-
-     @Test
-     @Disabled //KOM IHÅG ATT TA BORT DENNA DISABLED!!!
+    @Test
     public void testPlayerEntersLocationWithMonster() {
-        Point p = new Point(0,0);
-         testLocation = new Location(p);
-      //  Monster m  = (Monster) new Ogre( 100, 200);
-       // testLocation.setMonster(m);
+        Point p = new Point(0, 0);
+        testLocation = new Location(p);
+        Monster m = (Monster) new Ogre(p);
+        testLocation.setMonster(m);
 
         String actual = testLocation.playerEntersLocation();
-        assertEquals("FIGHT!!!",actual);
+        assertEquals("FIGHT!!!", actual);
 
     }
+
     @Test
     public void testPlayerEntersLocationWithNoMonster() {
-        Point p = new Point(0,0);
+        Point p = new Point(0, 0);
         testLocation = new Location(p);
 
         String actual = testLocation.playerEntersLocation();
-        assertEquals("silence",actual);
+        assertEquals("silence", actual);
     }
 
 

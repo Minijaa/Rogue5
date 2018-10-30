@@ -102,6 +102,8 @@ public class App {
     }
 
     private void fight() {
+        Location currentLocation = map.getActivePlayerLocation();
+        currentLocation.setLocationText("FIGHT!!!");
         boolean running = true;
         Monster monsterToKill = map.getActivePlayerLocation().getMonster();
         System.out.println();

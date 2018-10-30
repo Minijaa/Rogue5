@@ -129,6 +129,7 @@ public class Map {
 		Location location = this.getLocationFromPoint(monsterToBeRemoved.getCurrentMonsterCords());
 		location.setMonster(null);
 		removeMonsterFromList(monsterToBeRemoved);
+		location.setLocationText("silence");
 	}
 
 	public void removeMonsterFromList(Monster monster) {

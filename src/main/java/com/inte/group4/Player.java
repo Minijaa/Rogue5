@@ -7,7 +7,7 @@ public class Player extends Sprite {
 
 	private ArrayList<Item> inventory;
 	//private final static int MAX_INVENTORY = 5;
-	private int maxInventory=5;
+	private int maxInventory;
 
 
 	public Player(int ap, int hp) {
