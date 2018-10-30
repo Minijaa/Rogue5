@@ -51,7 +51,7 @@ public class App {
                 case "Å": // Stand still
                     break;
                 default:
-                    System.out.println("Wrong input, try again!");
+                    System.out.println("Wrong input, try again! - Runcommandloop");
             }
             map.moveAllMonsters();
 
@@ -122,7 +122,7 @@ public class App {
                     running = askIfQuit();
                     break;
                 default:
-                    System.out.println("Wrong input, try again!");
+                    System.out.println("Wrong input, try again! - Fight");
             }
             if (map.getActivePlayerLocation().getMonster() == null) {
                 break;
@@ -187,7 +187,7 @@ public class App {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Wrong input, try again!");
+                    System.out.println("Wrong input, try again! - Game over");
             }
         }
     }
@@ -219,6 +219,7 @@ public class App {
         if (exitValue != 1) {
             System.out.println(exitValue + ": Exit inventory");
             int pickedItemIndex = keyboard.nextInt();
+            keyboard.nextLine();
 
             while (pickedItemIndex != (exitValue)) {
                 if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
@@ -226,13 +227,14 @@ public class App {
                 } else {
                     Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
                     player.useItem(gottenItem);
-                    exitValue = player.printInventory();
-                    if (exitValue == 0) {
-                        break;
-                    }
-                    System.out.println(exitValue + ": Exit inventory");
-                    pickedItemIndex = keyboard.nextInt();
                 }
+                exitValue = player.printInventory();
+                if (exitValue == 0) {
+                    break;
+                }
+                System.out.println(exitValue + ": Exit inventory");
+                pickedItemIndex = keyboard.nextInt();
+                keyboard.nextLine();
             }
         }
     }
@@ -268,6 +270,7 @@ public class App {
             map.setActivePlayerLocation(newX, newY);
         }
     }
+
     public static void main(String[] args) {
         new App().setUp();
     }
