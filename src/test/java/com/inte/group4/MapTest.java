@@ -109,8 +109,6 @@ class MapTest {
     @Test
     void testMoveAllMonsters() {
         Monster monsterInArrayList = newMap.getMonsterFromList(5);
-        // Location originalLocation =
-        // newMap.getLocationFromPoint(monsterInArrayList.getCurrentMonsterCords());
         newMap.moveAllMonsters();
         Point pointAfterMove = monsterInArrayList.getCurrentMonsterCords();
         Location locationAfterMove = newMap.getLocationFromPoint(pointAfterMove);
@@ -120,7 +118,7 @@ class MapTest {
         assertEquals(expectedPoint, pointAfterMove);
     }
 
-    // Kristina
+
     @Test
     void testMapCharUpdateAtNewLocationOnMove() {
         Monster monsterInArrayList = newMap.getMonsterFromList(8);
@@ -129,7 +127,6 @@ class MapTest {
         assertEquals(monsterInArrayList.getMonsterChar(), newLocation.getMapChar());
     }
 
-    // Kristina
     @Test
     void testMapCharUpdateAtOldLocationOnMove() {
         Monster monsterInArrayList = newMap.getMonsterFromList(14);
