@@ -2,9 +2,6 @@ package com.inte.group4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -48,26 +45,26 @@ class PlayerTest {
 
 	@Test
 	public void addNullItemToPlayerInventoryTest() {
-		String nullItemString = newPlayer.addToInventory(null);
+		String nullItemString = newPlayer.addItemToInventory(null);
 		assertNull(nullItemString);
 	}
 
 	@Test
 	public void addItemToPlayerInventoryTest() {
 		Item itemToBeAdded = spawnItem();
-		String acceptedAddString = newPlayer.addToInventory(itemToBeAdded);
+		String acceptedAddString = newPlayer.addItemToInventory(itemToBeAdded);
 		assertEquals(1, newPlayer.getInventorySize());
 		assertEquals("You found " + itemToBeAdded.toString(), acceptedAddString);
 	}
 
 	@Test
 	public void fillPlayerInventoryTest() {
-		while (newPlayer.getInventorySize() < newPlayer.getMaxInventory()) {
+		while (newPlayer.getInventorySize() < newPlayer.getMaxInventorySize()) {
 			Item newItem = spawnItem();
-			newPlayer.addToInventory(newItem);
+			newPlayer.addItemToInventory(newItem);
 		}
 		Item oneTooMany = spawnItem();
-		String inventoryFullString = newPlayer.addToInventory(oneTooMany);
+		String inventoryFullString = newPlayer.addItemToInventory(oneTooMany);
 		assertEquals("Cannot add item, inventory is full!", inventoryFullString);
 	}
 
@@ -75,9 +72,9 @@ class PlayerTest {
 	public void removeFromPlayerInventoryByObjectTest() {
 		Item firstItem = spawnItem();
 		Item itemToRemove = spawnItem();
-		newPlayer.addToInventory(firstItem);
-		newPlayer.addToInventory(itemToRemove);
-		Item removedItem = newPlayer.removeFromInventory(itemToRemove);
+		newPlayer.addItemToInventory(firstItem);
+		newPlayer.addItemToInventory(itemToRemove);
+		Item removedItem = newPlayer.removeItemFromInventory(itemToRemove);
 		assertEquals(1, newPlayer.getInventorySize());
 		assertEquals(itemToRemove, removedItem);
 	}
@@ -85,23 +82,23 @@ class PlayerTest {
 	@Test
 	public void removeFromPlayerInventoryByIndexTest() {
 		Item itemToRemove = spawnItem();
-		newPlayer.addToInventory(spawnItem());
-		newPlayer.addToInventory(itemToRemove);
-		newPlayer.addToInventory(spawnItem());
-		Item removedItem = newPlayer.removeFromInventory(1);
+		newPlayer.addItemToInventory(spawnItem());
+		newPlayer.addItemToInventory(itemToRemove);
+		newPlayer.addItemToInventory(spawnItem());
+		Item removedItem = newPlayer.removeItemFromInventory(1);
 		assertEquals(2, newPlayer.getInventorySize());
 		assertEquals(itemToRemove, removedItem);
 	}
 
 	@Test
 	public void removeNullItemFromPlayerInventoryTest() {
-		Item nullItem = newPlayer.removeFromInventory(null);
+		Item nullItem = newPlayer.removeItemFromInventory(null);
 		assertNull(nullItem);
 	}
 
 	@Test
 	public void removeIncorrectIndexFromPlayerInventoryTest() {
-		Item IncorrectIndexItem = newPlayer.removeFromInventory(5);
+		Item IncorrectIndexItem = newPlayer.removeItemFromInventory(5);
 		assertNull(IncorrectIndexItem);
 	}
 
@@ -110,36 +107,36 @@ class PlayerTest {
 	public void fillAndThenRemoveFromPlayerInventoryTest() {
 		Potion potionToRemove = new Potion(200);
 		Potion potionToAdd = new Potion(200);
-		newPlayer.addToInventory(new Potion(200));
-		newPlayer.addToInventory(new Potion(200));
-		newPlayer.addToInventory(new Potion(200));
-		newPlayer.addToInventory(new Potion(200));
-		newPlayer.addToInventory(potionToRemove);
-		newPlayer.addToInventory(potionToAdd);
-		newPlayer.removeFromInventory(potionToRemove);
-		newPlayer.addToInventory(potionToAdd);
-		assertEquals(potionToAdd, newPlayer.getItemByIndex(4));
+		newPlayer.addItemToInventory(new Potion(200));
+		newPlayer.addItemToInventory(new Potion(200));
+		newPlayer.addItemToInventory(new Potion(200));
+		newPlayer.addItemToInventory(new Potion(200));
+		newPlayer.addItemToInventory(potionToRemove);
+		newPlayer.addItemToInventory(potionToAdd);
+		newPlayer.removeItemFromInventory(potionToRemove);
+		newPlayer.addItemToInventory(potionToAdd);
+		assertEquals(potionToAdd, newPlayer.getItemFromInventoryByIndex(4));
 	}
 
 	@Test
 	public void getItemFromInventoryTest() {
 		Item itemToGet = spawnItem();
-		newPlayer.addToInventory(spawnItem());
-		newPlayer.addToInventory(itemToGet);
-		newPlayer.addToInventory(spawnItem());
-		Item gottenItem = newPlayer.getItemByIndex(1);
+		newPlayer.addItemToInventory(spawnItem());
+		newPlayer.addItemToInventory(itemToGet);
+		newPlayer.addItemToInventory(spawnItem());
+		Item gottenItem = newPlayer.getItemFromInventoryByIndex(1);
 		assertEquals(itemToGet, gottenItem);
 	}
 
 	@Test
 	public void getIncorrectIndexItemFromInventoryTest() {
-		Item incorrectIndexItem = newPlayer.getItemByIndex(5);
+		Item incorrectIndexItem = newPlayer.getItemFromInventoryByIndex(5);
 		assertNull(incorrectIndexItem);
 	}
 
 	@Test
 	public void useNullItemTest() {
-		int resultOfUseItem = newPlayer.useItem(null);
+		int resultOfUseItem = newPlayer.useInventoryItem(null);
 		assertEquals(0, resultOfUseItem);
 
 	}
@@ -153,7 +150,7 @@ class PlayerTest {
 	@Test
 	void printInventoryWithOneItemTest() {
 		Item newItem = spawnItem();
-		newPlayer.addToInventory(newItem);
+		newPlayer.addItemToInventory(newItem);
 		int inventoryResult = newPlayer.printInventory();
 		assertEquals(2, inventoryResult);
 	}
@@ -163,7 +160,7 @@ class PlayerTest {
 		Player playerWithBigInventory = new Player(100, 1000, 50);
 		for (int i = 0; i < 50; i++) {
 			Item newItem = spawnItem();
-			playerWithBigInventory.addToInventory(newItem);
+			playerWithBigInventory.addItemToInventory(newItem);
 		}
 		int inventoryResult = playerWithBigInventory.printInventory();
 		assertEquals(51, inventoryResult);
@@ -174,7 +171,7 @@ class PlayerTest {
 		Potion minorPotion = new Potion(200);
 		newPlayer.decreaseHp(300);
 		int hurtPlayerHp = newPlayer.getCurrentHp();
-		newPlayer.useItem(minorPotion);
+		newPlayer.useInventoryItem(minorPotion);
 		assertEquals(hurtPlayerHp + minorPotion.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
@@ -182,7 +179,7 @@ class PlayerTest {
 	void useUltimatePotionTest() {
 		Potion ultimatePotion = new Potion(501);
 		newPlayer.decreaseHp(900);
-		newPlayer.useItem(ultimatePotion);
+		newPlayer.useInventoryItem(ultimatePotion);
 		assertEquals(newPlayer.getMaxHp(), newPlayer.getCurrentHp());
 	}
 
@@ -191,7 +188,7 @@ class PlayerTest {
 		Scroll powerScroll = new Scroll(true, true);
 		int oldMaxHp = newPlayer.getMaxHp();
 		int oldAp = newPlayer.getAp();
-		newPlayer.useItem(powerScroll);
+		newPlayer.useInventoryItem(powerScroll);
 		assertEquals(oldMaxHp + powerScroll.getMaxHpBuff(), newPlayer.getMaxHp());
 		assertEquals(oldAp + powerScroll.getMaxApBuff(), newPlayer.getAp());
 	}
@@ -201,7 +198,7 @@ class PlayerTest {
 		Bandage newBandage = new Bandage();
 		newPlayer.decreaseHp(500);
 		int hurtPlayerHp = newPlayer.getCurrentHp();
-		newPlayer.useItem(newBandage);
+		newPlayer.useInventoryItem(newBandage);
 		assertEquals(hurtPlayerHp + newBandage.getHpIncreaseValue(), newPlayer.getCurrentHp());
 	}
 
@@ -210,7 +207,7 @@ class PlayerTest {
 		setUpNormalInventory();
 		newPlayer.sortInventory();
 		Potion expectedPotion = new Potion(200);
-		Potion actualPotion = (Potion) newPlayer.getItemByIndex(0);
+		Potion actualPotion = (Potion) newPlayer.getItemFromInventoryByIndex(0);
 		assertEquals(expectedPotion, actualPotion);
 	}
 
@@ -219,21 +216,21 @@ class PlayerTest {
 		setUpNormalInventory();
 		newPlayer.sortInventory();
 		Scroll expectedScroll = new Scroll(true, true);
-		Scroll actualScroll = (Scroll) newPlayer.getItemByIndex(4);
+		Scroll actualScroll = (Scroll) newPlayer.getItemFromInventoryByIndex(4);
 		assertEquals(expectedScroll, actualScroll);
 	}
 
 	private void setUpNormalInventory() {
 		Scroll powerScroll = new Scroll(true, true);
-		newPlayer.addToInventory((powerScroll));
+		newPlayer.addItemToInventory((powerScroll));
 		Scroll strengthScroll = new Scroll(true, false);
-		newPlayer.addToInventory((strengthScroll));
+		newPlayer.addItemToInventory((strengthScroll));
 		Bandage bOne = new Bandage();
-		newPlayer.addToInventory(bOne);
+		newPlayer.addItemToInventory(bOne);
 		Potion massivePotion = new Potion(600);
-		newPlayer.addToInventory(massivePotion);
+		newPlayer.addItemToInventory(massivePotion);
 		Potion minorPotion = new Potion(200);
-		newPlayer.addToInventory(minorPotion);
+		newPlayer.addItemToInventory(minorPotion);
 	}
 
 	@Test
@@ -242,7 +239,7 @@ class PlayerTest {
 		setupLargeUnsortedInventoryOfPotions();
 		largeInventroyPlayer.sortInventory();
 		Potion expectedPotion = new Potion(200);
-		Potion actualPotion = (Potion) largeInventroyPlayer.getItemByIndex(0);
+		Potion actualPotion = (Potion) largeInventroyPlayer.getItemFromInventoryByIndex(0);
 		assertEquals(expectedPotion, actualPotion);
 	}
 
@@ -252,7 +249,7 @@ class PlayerTest {
 		setupLargeUnsortedInventoryOfPotions();
 		largeInventroyPlayer.bubbleSortPotionInventory();
 		Potion expectedPotion = new Potion(200);
-		Potion actualPotion = (Potion) largeInventroyPlayer.getItemByIndex(0);
+		Potion actualPotion = (Potion) largeInventroyPlayer.getItemFromInventoryByIndex(0);
 		assertEquals(expectedPotion, actualPotion);
 	}
 
@@ -261,13 +258,13 @@ class PlayerTest {
 		for (int i = 0; i < 10000; i++) {
 			if (i < 3000) {
 				p = new Potion(1000000);
-				largeInventroyPlayer.addToInventory(p);
+				largeInventroyPlayer.addItemToInventory(p);
 			} else if (i < 6000) {
 				p = new Potion(500);
-				largeInventroyPlayer.addToInventory(p);
+				largeInventroyPlayer.addItemToInventory(p);
 			} else {
 				p = new Potion(200);
-				largeInventroyPlayer.addToInventory(p);
+				largeInventroyPlayer.addItemToInventory(p);
 			}
 		}
 

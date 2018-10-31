@@ -70,7 +70,6 @@ public class App {
     private boolean evaluatePlayerLocation() {
         if (checkMonsterAtLocation() && player.isAlive()) {
             fight();
-            System.out.println("Leaving fight method!");
         }
         if (player.isAlive()) {
             getTreasure();
@@ -103,7 +102,6 @@ public class App {
     }
 
     private void fight() {
-    	System.out.println("Entering fight method!");
         Location currentLocation = map.getActivePlayerLocation();
         currentLocation.setLocationText("FIGHT!!!");
         boolean running = true;
@@ -119,14 +117,13 @@ public class App {
                     playerAttacks();
                     break;
                 case "P":
-                    // System.out.println("Potion");
                     usePotionInBattle();
                     break;
                 case "Q":
                     running = askIfQuit();
                     break;
                 default:
-                    System.out.println("Wrong input, try again! - Fight");
+                    System.out.println("Wrong input, try again!");
             }
             if (map.getActivePlayerLocation().getMonster() == null) {
                 break;
@@ -135,9 +132,10 @@ public class App {
     }
 
     private void usePotionInBattle() {
-        if (player.getItemByIndex(0) != null && player.getItemByIndex(0) instanceof Potion) {
-            Potion pot = (Potion) player.getItemByIndex(0);
-            player.useItem(pot);
+        player.sortInventory();
+        if (player.getItemFromInventoryByIndex(0) != null && player.getItemFromInventoryByIndex(0) instanceof Potion) {
+            Potion pot = (Potion) player.getItemFromInventoryByIndex(0);
+            player.useInventoryItem(pot);
             monsterAttacks(map.getActivePlayerLocation().getMonster());
         } else {
             System.out.println("You don't have a potion, attack!");
@@ -202,10 +200,10 @@ public class App {
         Item treasure = activeLocation.getTreasure();
 
         if (treasure != null) {
-            if (player.getInventorySize() == player.getMaxInventory()) {
+            if (player.getInventorySize() == player.getMaxInventorySize()) {
                 System.out.println("Inventory FULL, use an item to pick up treasure!");
             } else {
-                player.addToInventory(treasure);
+                player.addItemToInventory(treasure);
                 activeLocation.removeTreasure();
             }
         }
@@ -220,6 +218,7 @@ public class App {
     }
 
     private void openInventoryCommand() {
+        player.sortInventory();
         int exitValue = player.printInventory();
         if (exitValue != 1) {
             System.out.println(exitValue + ": Exit inventory");
@@ -230,8 +229,8 @@ public class App {
                 if (pickedItemIndex > player.getInventorySize() || pickedItemIndex < 0) {
                     System.out.println("No item at that index!");
                 } else {
-                    Item gottenItem = player.getItemByIndex(pickedItemIndex - 1);
-                    player.useItem(gottenItem);
+                    Item gottenItem = player.getItemFromInventoryByIndex(pickedItemIndex - 1);
+                    player.useInventoryItem(gottenItem);
                 }
                 exitValue = player.printInventory();
                 if (exitValue == 0) {
