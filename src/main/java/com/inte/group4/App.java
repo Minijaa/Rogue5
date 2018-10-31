@@ -70,6 +70,7 @@ public class App {
     private boolean evaluatePlayerLocation() {
         if (checkMonsterAtLocation() && player.isAlive()) {
             fight();
+            System.out.println("Leaving fight method!");
         }
         if (player.isAlive()) {
             getTreasure();
@@ -102,6 +103,7 @@ public class App {
     }
 
     private void fight() {
+    	System.out.println("Entering fight method!");
         Location currentLocation = map.getActivePlayerLocation();
         currentLocation.setLocationText("FIGHT!!!");
         boolean running = true;
@@ -164,7 +166,7 @@ public class App {
         player.decreaseHp(monsterToKill.attack());
         System.out.println(
                 "The " + monsterToKill.getClass().getSimpleName() + " hit you for " + monsterToKill.getAp() + " dmg!");
-        if (!evaluatePlayerLocation()) {
+        if (!player.isAlive()) {
             gameOver();
             return;
         }
