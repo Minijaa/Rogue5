@@ -2,6 +2,7 @@ package com.inte.group4;
 
 import java.util.Scanner;
 
+//@edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DM_DEFAULT_ENCODING")
 public class App {
 
     private Map map;
@@ -264,14 +265,19 @@ public class App {
         }
     }
 
-    private void travelDirection(int newX, int newY) {
+    String travelDirection(int newX, int newY) {
+        StringBuilder appBuilder = new StringBuilder("");
         if (newX > 9 || newX < 0 || newY > 9 || newY < 0) {
             System.out.println("Invalid move!!");
+            appBuilder.append("Invalid move!!");
+            return appBuilder.toString();
         } else {
             Location oldLocation = map.getActivePlayerLocation();
             oldLocation.setVisited(true);
             oldLocation.setMapChar();
             map.setActivePlayerLocation(newX, newY);
+            appBuilder.append("Valid move!!");
+            return appBuilder.toString();
         }
     }
 

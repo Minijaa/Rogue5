@@ -22,9 +22,17 @@ public class AppTest {
         assertEquals(expectedOutput, actualOutput);
 
     }
+    @Test
+    public void testTravelDirectionInvalidMove(){
+        String expextedOutPut = "Invalid move!!";
+        String actualOutPut = newTestApp.travelDirection(10, 10);
+        assertEquals(expextedOutPut,actualOutPut);
+
+    }
 
     @Test
     public void testValidPlayerMove() {
+
 
 
     }
