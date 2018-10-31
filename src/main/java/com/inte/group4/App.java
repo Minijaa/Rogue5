@@ -8,19 +8,24 @@ public class App {
     private Map map;
     private Scanner keyboard = new Scanner(System.in);
     private Player player;
+
     //ändra!
-    public App(int i){
+    public App(int i) {
         setUp();
     }
-    public App(){
+
+    public App() {
         setUp();
         runCommandLoop();
     }
+
     private void setUp() {
         map = new Map();
         player = new Player(100, 1000);
     }
-
+    public Player getPlayer(){
+        return player;
+    }
     public Map getMap() {
         return map;
     }
@@ -96,7 +101,7 @@ public class App {
         }
     }
 
-    private boolean checkMonsterAtLocation() {
+    boolean checkMonsterAtLocation() {
         if (map.getActivePlayerLocation().getMonster() != null) {
             return true;
         } else {
@@ -197,7 +202,7 @@ public class App {
                     break;
                 case "2":
                     System.out.println("Exiting game, well played or something ¯\\_(ツ)_/¯");
-                    running=false;
+                    running = false;
                     System.exit(0);
                     break;
                 default:
@@ -206,7 +211,7 @@ public class App {
         }
     }
 
-    private int getTreasure() {
+    int getTreasure() {
         Location activeLocation = map.getActivePlayerLocation();
         Item treasure = activeLocation.getTreasure();
 
@@ -223,7 +228,7 @@ public class App {
         return -1;
     }
 
-    private boolean lastMonsterOnMap() {
+    boolean lastMonsterOnMap() {
         if (map.getMonsterListSize() == 0) {
             return true;
         } else {
