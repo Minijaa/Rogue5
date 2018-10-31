@@ -157,11 +157,11 @@ class PlayerTest {
 		int inventoryResult = newPlayer.printInventory();
 		assertEquals(2, inventoryResult);
 	}
-	
+
 	@Test
 	void printInventoryWithManyItemsTest() {
-		Player playerWithBigInventory = new Player(100,1000, 50);
-		for(int i = 0; i < 50; i++) {
+		Player playerWithBigInventory = new Player(100, 1000, 50);
+		for (int i = 0; i < 50; i++) {
 			Item newItem = spawnItem();
 			playerWithBigInventory.addToInventory(newItem);
 		}
