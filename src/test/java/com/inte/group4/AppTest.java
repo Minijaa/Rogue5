@@ -8,32 +8,40 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
     App newTestApp;
-
+    Map map;
     @BeforeEach
     void setUp() throws Exception {
-        newTestApp = new App();
+        newTestApp = new App(1);
+        map = newTestApp.getMap();
     }
 
     @Test
-    public void testNormalizeString() {
+    void testNormalizeString() {
         String actualOutput = newTestApp.normalizeString(" unNormalizedString");
         String expectedOutput = "Unnormalizedstring";
 
         assertEquals(expectedOutput, actualOutput);
 
     }
+
     @Test
-    public void testTravelDirectionInvalidMove(){
-        String expextedOutPut = "Invalid move!!";
+    void testTravelDirectionInvalidMove() {
+        String expectedOutput = "Invalid move!!";
         String actualOutPut = newTestApp.travelDirection(10, 10);
-        assertEquals(expextedOutPut,actualOutPut);
+        assertEquals(expectedOutput, actualOutPut);
 
     }
 
     @Test
-    public void testValidPlayerMove() {
+    void testTravelDirectionValidMove() {
+        String str = newTestApp.travelDirection(4, 1);
+        assertEquals("Valid move!!", str);
+    }
 
-
+    @Test
+    void testGetTreasure(){
+        map.setActivePlayerLocation(4,1);
+        //newTestApp.getT
 
     }
 

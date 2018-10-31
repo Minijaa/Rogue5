@@ -8,11 +8,21 @@ public class App {
     private Map map;
     private Scanner keyboard = new Scanner(System.in);
     private Player player;
-
+    //ändra!
+    public App(int i){
+        setUp();
+    }
+    public App(){
+        setUp();
+        runCommandLoop();
+    }
     private void setUp() {
         map = new Map();
         player = new Player(100, 1000);
-        runCommandLoop();
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     private String readLine() {
@@ -196,18 +206,21 @@ public class App {
         }
     }
 
-    private void getTreasure() {
+    private int getTreasure() {
         Location activeLocation = map.getActivePlayerLocation();
         Item treasure = activeLocation.getTreasure();
 
         if (treasure != null) {
             if (player.getInventorySize() == player.getMaxInventorySize()) {
                 System.out.println("Inventory FULL, use an item to pick up treasure!");
+                return 0;
             } else {
                 player.addItemToInventory(treasure);
                 activeLocation.removeTreasure();
+                return 1;
             }
         }
+        return -1;
     }
 
     private boolean lastMonsterOnMap() {
@@ -282,6 +295,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new App().setUp();
+        new App();
     }
 }
